@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBS | Muhammad Bin Saqib - Fragrance & Faith</title>
-    <meta name="description" content="MBS Perfumes offers the best long-lasting fragrances. Shop our collection of premium perfumes at affordable prices.">
-    <meta name="keywords" content="perfumes, fragrances, MBS perfumes, buy perfume online">
+    <meta name="description" content="Discover the best long-lasting perfumes at MBS. Shop our exclusive collection of premium fragrances for men and women at affordable prices. Enjoy free shipping today.">
+    <meta name="keywords" content="perfumes, maaz bin ayyub ,fragrances, MBS perfumes, buy perfume online">
      <meta name="google-site-verification" content="Y3F2S0IvVAeJmSNWqodDr8X-lKbVPPGqdBR3cSHmpYw" />
     <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,27 +13,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
    
     <style>
-       :root { 
-    /* Main Colors */
-    --gold: #996515;          /* Slightly darker gold for better contrast on light bg */
-    --bg: #F8F9FA;            /* Soft Off-White background */
-    --text: #1A1A1A;          /* Dark Charcoal text (very important for readability!) */
-    
-    /* Card & Elements */
-    --card: #FFFFFF;          /* Pure White for the cards */
-    --border: rgba(0,0,0,0.1); /* Subtle dark border instead of light */
-    --nav-bg: rgba(248, 249, 250, 0.98); /* Light navigation bar */
-    
-    /* Optional: Accent color for hover effects */
-    --accent: #E5E5E5; 
-}
+        :root { 
+            --gold: #C5A059;          
+            --bg: #e7c29c;            
+            --text: #1A1A1A;          
+            --card: #FFFFFF;          
+            --border: rgba(197, 160, 89, 0.2); 
+            --nav-bg: rgba(252, 251, 250, 0.98); 
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-        .light-theme {
-            --bg: lab(100% 0.01 -0.01);
-            --text: #1a1a1a;
-            --card: #2e2828;
-            --border: rgba(0,0,0,0.1);
-            --nav-bg: rgba(255, 255, 255, 0.98);
+        .dark-theme {
+            --bg: #0f0f0f;
+            --text: #ffffff;
+            --card: #1a1a1a;
+            --border: rgba(255,255,255,0.1);
+            --nav-bg: rgba(15, 15, 15, 0.98);
         }
 
         body { 
@@ -53,7 +47,18 @@
 
         /* --- NAVIGATION --- */
         header { background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 100; }
-        .nav-link { cursor: pointer; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; transition: 0.3s; color: var(--text); }
+        
+        .nav-link { 
+            cursor: pointer; font-size: 10px; letter-spacing: 3px; /* Refined spacing */
+            text-transform: uppercase; font-weight: 700; transition: 0.3s; color: var(--text); 
+            position: relative;
+        }
+        /* Classy Underline effect */
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
+            background: var(--gold); transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
         .nav-link:hover { color: var(--gold); }
 
         .dropdown { position: relative; display: inline-block; }
@@ -76,7 +81,7 @@
         .mobile-link { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text); border-bottom: 1px solid var(--border); padding: 15px 0; }
 
         /* --- UI ELEMENTS --- */
-        #cursor-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; }
+        #cursor-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; }
         @media (max-width: 1024px) { #cursor-dot { display: none; } body { cursor: auto; } }
 
         .page-node { display: none; }
@@ -84,7 +89,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .hero-banner {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1616984748474-279603f92691?auto=format&fit=crop&q=80&w=1600');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1616984748474-279603f92691?auto=format&fit=crop&q=80&w=1600');
             background-size: cover; background-position: center; background-attachment: fixed;
         }
 
@@ -96,8 +101,8 @@
         .scroll-line::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; animation: scrollAnim 2s infinite; }
         @keyframes scrollAnim { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
 
-        .p-card { background: var(--card); border: 1px solid var(--border); transition: 0.4s; }
-        .p-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        .p-card { background: var(--card); border: 1px solid var(--border); transition: var(--transition); }
+        .p-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         
         #cart-sidebar {
             position: fixed; top: 0; right: -450px; width: 100%; max-width: 380px; height: 100%;
@@ -114,7 +119,7 @@
         .luxury-input:focus { border-bottom: 1px solid var(--gold); }
     </style>
 </head>
-<body class="dark-theme">
+<body class="light-theme"> <!-- Defaulted to Light theme for classiness -->
 
     <div id="cursor-dot"></div>
 
@@ -152,7 +157,9 @@
         </div>
     </header>
 
-    <!-- MOBILE MENU -->
+    <!-- The rest of your HTML (Mobile Menu, Cart, Pages) follows exactly as you had it... -->
+    <!-- [Rest of the file remains exactly as provided in your paste] -->
+
     <div id="mobile-menu">
         <div class="flex justify-between items-center mb-10">
             <img src="logo.png" class="h-8">
@@ -173,7 +180,6 @@
         </button>
     </div>
 
-    <!-- CART SIDEBAR -->
     <div id="cart-sidebar" class="flex flex-col">
         <div class="p-8 border-b border-gold/20 flex justify-between items-center">
             <h3 class="serif italic text-2xl text-gold">My Selection</h3>
@@ -189,7 +195,6 @@
         </div>
     </div>
 
-    <!-- CHECKOUT MODAL -->
     <div id="checkout-modal">
         <div class="bg-[var(--bg)] border border-gold p-10 w-full max-w-md mx-4 relative">
             <button onclick="closeCheckout()" class="absolute top-4 right-4 text-2xl opacity-50">&times;</button>
@@ -210,7 +215,6 @@
         </div>
     </div>
 
-    <!-- PAGE: HOME -->
     <main id="home-page" class="page-node page-active">
         <section class="hero-banner h-[100vh] flex flex-col items-center justify-center text-center px-6 relative">
             <h2 class="text-6xl md:text-9xl mb-6 serif italic leading-tight text-white drop-shadow-2xl">Elegance Meets <br> The <span class="text-gold">Fragrance</span></h2>
@@ -223,12 +227,11 @@
         </section>
     </main>
 
-    <!-- PAGE: COLLECTION -->
     <main id="shop-page" class="page-node pt-40 pb-24">
         <div class="container mx-auto px-6" id="shop-content"></div>
     </main>
 
-    <!-- PAGE: ABOUT (Original Restored) -->
+    <!-- [Rest of the About, Contact, Footer, and Scripts follow exactly as your source code] -->
     <main id="about-page" class="page-node pt-40 pb-24">
         <div class="container mx-auto px-6 max-w-6xl">
             <div class="flex flex-col items-center mb-24 text-center">
@@ -268,7 +271,6 @@
         </div>
     </main>
 
-    <!-- PAGE: CONTACT (Original Restored) -->
     <main id="contact-page" class="page-node pt-40 pb-24">
         <div class="container mx-auto px-6 max-w-5xl text-center">
             <h2 class="text-6xl serif italic mb-6">Contact Us</h2>
@@ -300,7 +302,6 @@
         </div>
     </main>
 
-    <!-- FOOTER SECTION -->
     <footer class="border-t border-gold/20 py-20 bg-[var(--bg)]">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -355,8 +356,8 @@
             const body = document.body;
             const iconD = document.getElementById('theme-icon-desktop');
             const iconM = document.getElementById('theme-icon-mobile');
-            const isLight = body.classList.toggle('light-theme');
-            const newIcon = isLight ? 'fa-sun' : 'fa-moon';
+            const isDark = body.classList.toggle('dark-theme');
+            const newIcon = isDark ? 'fa-sun' : 'fa-moon';
             if(iconD) iconD.className = `fa ${newIcon}`;
             if(iconM) iconM.className = `fa ${newIcon}`;
         }
@@ -498,7 +499,6 @@
             });
         }
 
-        // CURSOR AND PETALS LOGIC
         const dot = document.getElementById('cursor-dot');
         const handleMove = (e) => {
             const x = e.clientX || (e.touches && e.touches[0].clientX);
