@@ -6,7 +6,7 @@
     <title>MBS | Muhammad Bin Saqib - Fragrance & Faith</title>
     <meta name="description" content="Discover the best long-lasting perfumes at MBS. Shop our exclusive collection of premium fragrances for men and women at affordable prices. Enjoy free shipping today.">
     <meta name="keywords" content="perfumes, maaz bin ayyub ,fragrances, MBS perfumes, buy perfume online">
-     <meta name="google-site-verification" content="Y3F2S0IvVAeJmSNWqodDr8X-lKbVPPGqdBR3cSHmpYw" />
+    <meta name="google-site-verification" content="Y3F2S0IvVAeJmSNWqodDr8X-lKbVPPGqdBR3cSHmpYw" />
     <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
             --bg: #e7c29c;            
             --text: #1A1A1A;          
             --card: #FFFFFF;          
-            --border: rgba(197, 160, 89, 0.2); 
+            --border: rgba(197, 160, 89, 0.3); 
             --nav-bg: rgba(252, 251, 250, 0.98); 
             --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -32,28 +32,34 @@
         }
 
         body { 
-            font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); 
-            transition: background 0.4s, color 0.4s; cursor: none; overflow-x: hidden; 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            transition: background 0.4s, color 0.4s;
+            overflow-x: hidden; 
         }
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- JASMINE PETAL EFFECT --- */
-        .jasmine-petal {
-            position: fixed; pointer-events: none; background: #fff;
-            border-radius: 150% 0 150% 0; opacity: 0.8; z-index: 9999;
-            filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));
+        /* --- SCROLL ANIMATION CLASSES --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- NAVIGATION --- */
         header { background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 100; }
         
         .nav-link { 
-            cursor: pointer; font-size: 10px; letter-spacing: 3px; /* Refined spacing */
+            cursor: pointer; font-size: 10px; letter-spacing: 3px;
             text-transform: uppercase; font-weight: 700; transition: 0.3s; color: var(--text); 
             position: relative;
         }
-        /* Classy Underline effect */
         .nav-link::after {
             content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
             background: var(--gold); transition: 0.3s;
@@ -80,48 +86,85 @@
         #mobile-menu.active { left: 0; }
         .mobile-link { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text); border-bottom: 1px solid var(--border); padding: 15px 0; }
 
-        /* --- UI ELEMENTS --- */
-        #cursor-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; }
-        @media (max-width: 1024px) { #cursor-dot { display: none; } body { cursor: auto; } }
-
         .page-node { display: none; }
-        .page-active { display: block; animation: fadeIn 0.8s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page-active { display: block; }
 
         .hero-banner {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1616984748474-279603f92691?auto=format&fit=crop&q=80&w=1600');
             background-size: cover; background-position: center; background-attachment: fixed;
         }
 
-        .scroll-indicator {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer;
-        }
-        .scroll-line { width: 1px; height: 50px; background: var(--gold); position: relative; overflow: hidden; }
-        .scroll-line::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; animation: scrollAnim 2s infinite; }
-        @keyframes scrollAnim { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
-
         .p-card { background: var(--card); border: 1px solid var(--border); transition: var(--transition); }
         .p-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         
-        #cart-sidebar {
-            position: fixed; top: 0; right: -450px; width: 100%; max-width: 380px; height: 100%;
-            background: var(--bg); border-left: 1px solid var(--gold); z-index: 2000; transition: 0.5s;
-        }
-        #cart-sidebar.open { right: 0; }
-        
-        #checkout-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(15px); z-index: 3000; display: none; align-items: center; justify-content: center;
-        }
+       /* --- CART SIDEBAR FIXED COLORS --- */
+#cart-sidebar {
+    position: fixed; 
+    top: 0; 
+    right: -450px; 
+    width: 100%; 
+    max-width: 380px; 
+    height: 100%;
+    background: #ffffff; /* Same as Order Details */
+    color: #1A1A1A;      /* Dark Black text */
+    border-left: 2px solid var(--gold); 
+    z-index: 2000; 
+    transition: 0.5s;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+}
+#cart-sidebar.open { right: 0; }
 
-        .luxury-input { background: transparent; border-bottom: 1px solid var(--border); padding: 15px 0; width: 100%; color: var(--text); font-size: 11px; outline: none; }
-        .luxury-input:focus { border-bottom: 1px solid var(--gold); }
+/* Cart Header */
+#cart-sidebar .cart-header {
+    padding: 30px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Cart Item Cards */
+.cart-item-card {
+    background: #f9f9f9; /* Subtle grey for items */
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 4px;
+}
+        
+        /* --- MODAL COLORS FIXED --- */
+        #checkout-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px); z-index: 3000; display: none; align-items: center; justify-content: center;
+        }
+        .checkout-card {
+            background: #ffffff; /* Explicit white for readability */
+            color: #1A1A1A; 
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .luxury-input { 
+            background: transparent; 
+            border-bottom: 2px solid #ddd; 
+            padding: 12px 0; 
+            width: 100%; 
+            color: #1A1A1A; 
+            font-size: 13px; 
+            font-weight: 600;
+            outline: none; 
+            margin-bottom: 20px;
+        }
+        .luxury-input::placeholder { color: #888; font-weight: 400; }
+        .luxury-input:focus { border-bottom: 2px solid var(--gold); }
     </style>
 </head>
-<body class="light-theme"> <!-- Defaulted to Light theme for classiness -->
-
-    <div id="cursor-dot"></div>
+<body class="light-theme">
 
     <!-- Header -->
     <header class="fixed top-0 w-full py-4 px-6">
@@ -157,9 +200,6 @@
         </div>
     </header>
 
-    <!-- The rest of your HTML (Mobile Menu, Cart, Pages) follows exactly as you had it... -->
-    <!-- [Rest of the file remains exactly as provided in your paste] -->
-
     <div id="mobile-menu">
         <div class="flex justify-between items-center mb-10">
             <img src="logo.png" class="h-8">
@@ -181,59 +221,64 @@
     </div>
 
     <div id="cart-sidebar" class="flex flex-col">
-        <div class="p-8 border-b border-gold/20 flex justify-between items-center">
-            <h3 class="serif italic text-2xl text-gold">My Selection</h3>
-            <button onclick="toggleCart()" class="text-3xl">&times;</button>
-        </div>
-        <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
-        <div class="p-8 border-t border-gold/20">
-            <div class="flex justify-between mb-6">
-                <span class="opacity-50 uppercase text-[10px]">Total Amount</span>
-                <span id="cart-total" class="text-gold font-bold text-xl">Rs. 0</span>
-            </div>
-            <button onclick="openCheckout()" class="w-full bg-gold text-black py-5 font-bold uppercase text-[10px] hover:bg-white transition">Proceed to Checkout</button>
-        </div>
+    <!-- Header -->
+    <div class="p-8 border-b border-gold/20 flex justify-between items-center">
+        <h3 class="serif italic text-2xl text-gold">My Selection</h3>
+        <button onclick="toggleCart()" class="text-3xl">&times;</button>
     </div>
 
+    <!-- Items (is mein products show hotay hain) -->
+    <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
+
+    <!-- Footer (Yahan total aur button hota hai) -->
+    <div class="p-8 border-t border-gold/20">
+        <div class="flex justify-between mb-6">
+            <span class="opacity-50 uppercase text-[10px] text-black">Total Amount</span>
+            <span id="cart-total" class="text-gold font-bold text-xl">Rs. 0</span>
+        </div>
+        
+        <!-- YEH RAHA NAYA BUTTON -->
+        <button onclick="openCheckout()" class="w-full bg-black text-white py-5 font-bold uppercase text-[11px] hover:bg-gold hover:text-black transition duration-300">
+            Proceed to Checkout
+        </button> 
+    </div>
+</div>
+
+    <!-- Checkout Modal with Fixed Colors -->
     <div id="checkout-modal">
-        <div class="bg-[var(--bg)] border border-gold p-10 w-full max-w-md mx-4 relative">
+        <div class="checkout-card relative">
             <button onclick="closeCheckout()" class="absolute top-4 right-4 text-2xl opacity-50">&times;</button>
-            <h3 class="serif italic text-3xl text-gold mb-6 text-center">Order Details</h3>
-            <form onsubmit="handleFinalSubmit(event)" class="space-y-4">
+            <h3 class="serif italic text-3xl text-gold mb-8 text-center">Order Details</h3>
+            <form onsubmit="handleFinalSubmit(event)">
                 <input type="text" id="cust-name" placeholder="FULL NAME" class="luxury-input" required>
                 <input type="text" id="cust-city" placeholder="CITY" class="luxury-input" required>
                 <textarea id="cust-address" placeholder="COMPLETE ADDRESS" class="luxury-input" rows="2" required></textarea>
-                <div class="py-2">
-                    <p class="text-[9px] opacity-50 uppercase tracking-widest mb-2">Payment Method</p>
-                    <div class="flex gap-6">
-                        <label class="text-[10px] flex items-center gap-2"><input type="radio" name="payment" value="COD" checked class="accent-gold"> COD</label>
-                        <label class="text-[10px] flex items-center gap-2"><input type="radio" name="payment" value="Online" class="accent-gold"> Online</label>
+                <div class="py-4">
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-3 font-bold">Payment Method</p>
+                    <div class="flex gap-8">
+                        <label class="text-[12px] flex items-center gap-2 cursor-pointer font-bold"><input type="radio" name="payment" value="COD" checked class="accent-gold w-4 h-4"> COD</label>
+                        <label class="text-[12px] flex items-center gap-2 cursor-pointer font-bold"><input type="radio" name="payment" value="Online" class="accent-gold w-4 h-4"> Online</label>
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-gold text-black py-4 font-bold uppercase text-[10px] mt-4">Place Order via WhatsApp</button>
+                <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-[11px] mt-6 hover:bg-gold transition duration-300">Place Order via WhatsApp</button>
             </form>
         </div>
     </div>
 
     <main id="home-page" class="page-node page-active">
         <section class="hero-banner h-[100vh] flex flex-col items-center justify-center text-center px-6 relative">
-            <h2 class="text-6xl md:text-9xl mb-6 serif italic leading-tight text-white drop-shadow-2xl">Elegance Meets <br> The <span class="text-gold">Fragrance</span></h2>
-            <p class="text-white/80 uppercase tracking-[0.6em] text-[11px] mb-14 font-black">Muhammad Bin Saqib | Signature Collection</p>
-            <button onclick="goToShop('all')" class="border-2 border-gold text-gold font-bold tracking-[0.4em] px-16 py-5 hover:bg-gold hover:text-black transition uppercase text-xs">Explore Catalog</button>
-            <div class="scroll-indicator" onclick="goToShop('fragrances')">
-                <span class="text-[8px] uppercase tracking-[0.3em] font-bold text-white">Scroll Down</span>
-                <div class="scroll-line"></div>
-            </div>
+            <h2 class="text-6xl md:text-9xl mb-6 serif italic leading-tight text-white drop-shadow-2xl reveal">Elegance Meets <br> The <span class="text-gold">Fragrance</span></h2>
+            <p class="text-white/80 uppercase tracking-[0.6em] text-[11px] mb-14 font-black reveal">Muhammad Bin Saqib | Signature Collection</p>
+            <button onclick="goToShop('fragrances')" class="border-2 border-gold text-gold font-bold tracking-[0.4em] px-16 py-5 hover:bg-gold hover:text-black transition uppercase text-xs reveal">Explore Catalog</button>
         </section>
     </main>
 
     <main id="shop-page" class="page-node pt-40 pb-24">
-        <div class="container mx-auto px-6" id="shop-content"></div>
+        <div class="container mx-auto px-6 reveal" id="shop-content"></div>
     </main>
 
-    <!-- [Rest of the About, Contact, Footer, and Scripts follow exactly as your source code] -->
     <main id="about-page" class="page-node pt-40 pb-24">
-        <div class="container mx-auto px-6 max-w-6xl">
+        <div class="container mx-auto px-6 max-w-6xl reveal">
             <div class="flex flex-col items-center mb-24 text-center">
                 <h2 class="text-6xl serif italic mb-4 text-gold">About Us</h2>
                 <div class="w-24 h-1 bg-gold mb-6"></div>
@@ -246,339 +291,273 @@
                         <p class="text-gold uppercase tracking-widest text-sm font-black italic">Founder & CEO of MBS</p>
                     </div>
                     <div class="opacity-80 leading-relaxed font-medium text-lg space-y-8">
-                        <p>Dedicated to creating a premium fragrance and Islamic lifestyle brand, aligning with Seerah and Sunnah while blending timeless tradition with modern luxury</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-6">
-                            <div>
-                                <h4 class="border-b border-gold pb-3 mb-4 uppercase text-xs font-black tracking-widest text-gold">Our Mission</h4>
-                                <p class="text-base italic font-light">To deliver elegance, authenticity, and scents inspired by spiritual heritage.</p>
-                            </div>
-                            <div>
-                                <h4 class="border-b border-gold pb-3 mb-4 uppercase text-xs font-black tracking-widest text-gold">Our Vision</h4>
-                                <p class="text-base italic font-light">To become a globally recognized leader in artisanal attars and premium kufis.</p>
-                            </div>
-                        </div>
+                        <p>Dedicated to creating a premium fragrance and Islamic lifestyle brand, aligning with Seerah and Sunnah.</p>
                     </div>
                 </div>
-                <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                    <div class="relative group">
-                        <div class="absolute -top-6 -left-6 w-full h-full border-2 border-gold opacity-30"></div>
-                        <div class="relative z-10 bg-[var(--card)] p-2 border border-gold/20 shadow-2xl">
-                            <img src="ceo.jpeg" class="w-80 h-[450px] object-cover grayscale brightness-90 group-hover:grayscale-0 transition duration-700">
-                        </div>
-                    </div>
+                <div class="w-full lg:w-1/2">
+                    <img src="ceo.jpeg" class="w-full h-[500px] object-cover rounded shadow-2xl">
                 </div>
             </div>
         </div>
     </main>
 
     <main id="contact-page" class="page-node pt-40 pb-24">
-        <div class="container mx-auto px-6 max-w-5xl text-center">
+        <div class="container mx-auto px-6 max-w-5xl text-center reveal">
             <h2 class="text-6xl serif italic mb-6">Contact Us</h2>
             <p class="text-gold uppercase tracking-[0.5em] text-xs font-black mb-24">Get in Touch with MBS</p>
             <div class="grid md:grid-cols-2 gap-20 text-left">
-                <div class="space-y-12">
-                    <div class="bg-[var(--card)] p-10 border-l-8 border-gold shadow-2xl">
-                        <h3 class="text-2xl text-gold serif italic mb-8">WhatsApp Support</h3>
-                        <a href="https://wa.me/923707107422" target="_blank" class="flex items-center group">
-                            <i class="fab fa-whatsapp text-5xl text-green-600 mr-6 group-hover:scale-110 transition"></i>
-                            <div><p class="text-2xl font-black">+92 370 7107422</p></div>
-                        </a>
-                    </div>
-                    <div class="opacity-60 space-y-6">
-                        <p><i class="fa fa-envelope mr-4 text-gold"></i> mbsislamicaccessories@gmail.com</p>
-                        <a href="https://www.google.com/maps/place/G3W8%2BR49,+Askari+14,+Rawalpindi" target="_blank" class="block hover:text-gold transition">
-                            <i class="fa fa-map-marker-alt mr-4 text-gold"></i> Shop #2, Gulshanabad Adyala Road, Askari 14 RWP
-                        </a>
-                    </div>
+                <div class="bg-[var(--card)] p-10 border-l-8 border-gold shadow-2xl">
+                    <h3 class="text-2xl text-gold serif italic mb-8">WhatsApp Support</h3>
+                    <a href="https://wa.me/923707107422" class="text-2xl font-black">+92 370 7107422</a>
                 </div>
                 <div class="bg-[var(--card)] p-10 border border-gold/10">
                     <form action="https://formspree.io/f/mkoqdyry" method="POST" class="space-y-8">
-                        <input type="text" name="name" placeholder="YOUR NAME" class="luxury-input" required>
-                        <textarea name="message" rows="4" placeholder="MESSAGE" class="luxury-input" required></textarea>
-                        <button type="submit" class="w-full bg-gold text-black py-4 font-bold tracking-widest uppercase text-xs">Send Email</button>
+                        <input type="text" name="name" placeholder="YOUR NAME" class="luxury-input" required style="color:var(--text); border-bottom-color:var(--border)">
+                        <textarea name="message" rows="4" placeholder="MESSAGE" class="luxury-input" required style="color:var(--text); border-bottom-color:var(--border)"></textarea>
+                        <button type="submit" class="w-full bg-gold text-black py-4 font-bold uppercase text-xs">Send Email</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
-
-    <footer class="border-t border-gold/20 py-20 bg-[var(--bg)]">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1 md:col-span-1">
-                    <img src="logo.png" alt="MBS Logo" class="h-12 mb-6">
-                    <p class="text-[10px] uppercase tracking-widest opacity-50 leading-relaxed font-medium">
-                        Redefining Islamic luxury through spiritual heritage and modern elegance. Inspired by Seerah & Sunnah.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="serif italic text-gold text-xl mb-8">Navigation</h4>
-                    <ul class="space-y-4 text-[10px] uppercase tracking-widest font-bold">
-                        <li><span onclick="showPage('home')" class="hover:text-gold cursor-pointer transition">Home</span></li>
-                        <li><span onclick="goToShop('fragrances')" class="hover:text-gold cursor-pointer transition">Attars</span></li>
-                        <li><span onclick="showPage('about')" class="hover:text-gold cursor-pointer transition">Our Story</span></li>
-                        <li><span onclick="showPage('contact')" class="hover:text-gold cursor-pointer transition">Contact</span></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="serif italic text-gold text-xl mb-8">Contact Info</h4>
-                    <p class="text-[10px] uppercase tracking-widest opacity-50 mb-4 leading-loose">
-                        Shop #2, Gulshanabad Adyala Road,<br>Askari 14 Rawalpindi, Pakistan
-                    </p>
-                    <p class="text-[10px] uppercase tracking-widest opacity-50">+92 370 7107422</p>
-                </div>
-                <div>
-                    <h4 class="serif italic text-gold text-xl mb-8">Social Presence</h4>
-                    <div class="flex space-x-6 text-2xl">
-                    
-                        <a href="https://www.facebook.com/share/1ArXGBZq2e/" class="hover:text-gold transition opacity-80"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/923707107422" class="hover:text-gold transition opacity-80"><i class="fab fa-whatsapp"></i></a>
-                   <a href="https://www.instagram.com/mbs_islamic_accessories/" target="_blank" 
-       class="hover:text-gold transition opacity-80">
-        <i class="fab fa-instagram"></i>
-    </a>
-                    </div>
-                </div>
-            </div>
-            <div class="pt-12 border-t border-white/5 text-center">
-                <p class="text-[9px] uppercase tracking-[0.5em] opacity-30 font-bold">
-                    &copy; 2026 Muhammad Bin Saqib|Maaz Bin Ayyub.
+<footer class="border-t border-gold/20 py-20 bg-[var(--bg)] reveal">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            
+            <!-- Column 1: Logo & Description -->
+            <div class="col-span-1">
+                <img src="logo.png" alt="MBS Logo" class="h-12 mb-6 mx-auto md:mx-0">
+                <p class="text-[10px] uppercase tracking-[0.2em] opacity-60 leading-loose text-center md:text-left font-medium">
+                    Redefining Islamic luxury through spiritual heritage and modern elegance. Inspired by Seerah & Sunnah.
                 </p>
             </div>
+
+            <!-- Column 2: Navigation (Hamburger Toggle on Mobile) -->
+            <div class="border-b border-gold/10 md:border-0 pb-4 md:pb-0">
+                <h4 onclick="toggleFooterSect('foot-nav')" class="serif italic text-gold text-2xl mb-4 md:mb-8 flex justify-between items-center cursor-pointer md:cursor-default">
+                    Navigation <i class="fa fa-chevron-down text-[10px] md:hidden transition-transform duration-300"></i>
+                </h4>
+                <ul id="foot-nav" class="hidden md:block space-y-5 text-[11px] uppercase tracking-[0.2em] font-bold text-center md:text-left">
+                    <li><span onclick="showPage('home')" class="hover:text-gold cursor-pointer transition">Home</span></li>
+                    <li><span onclick="goToShop('fragrances')" class="hover:text-gold cursor-pointer transition">Attars</span></li>
+                    <li><span onclick="showPage('about')" class="hover:text-gold cursor-pointer transition">Our Story</span></li>
+                    <li><span onclick="showPage('contact')" class="hover:text-gold cursor-pointer transition">Contact</span></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Contact Info (Hamburger Toggle on Mobile) -->
+            <div class="border-b border-gold/10 md:border-0 pb-4 md:pb-0">
+                <h4 onclick="toggleFooterSect('foot-contact')" class="serif italic text-gold text-2xl mb-4 md:mb-8 flex justify-between items-center cursor-pointer md:cursor-default">
+                    Contact Info <i class="fa fa-chevron-down text-[10px] md:hidden transition-transform duration-300"></i>
+                </h4>
+                <div id="foot-contact" class="hidden md:block text-center md:text-left">
+                    <p class="text-[10px] uppercase tracking-[0.2em] opacity-60 mb-5 leading-loose">
+                        Shop #2, Gulshanabad Adyala Road,<br>Askari 14 Rawalpindi, Pakistan
+                    </p>
+                    <p class="text-[10px] uppercase tracking-[0.2em] opacity-60 font-bold">+92 370 7107422</p>
+                </div>
+            </div>
+
+            <!-- Column 4: Social Presence -->
+            <div class="text-center md:text-left">
+                <h4 class="serif italic text-gold text-2xl mb-8">Social Presence</h4>
+                <div class="flex justify-center md:justify-start space-x-8 text-2xl text-[var(--text)]">
+                    <a href="https://www.facebook.com/share/1ArXGBZq2e/" class="hover:text-gold transition opacity-80"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/923707107422" class="hover:text-gold transition opacity-80"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/mbs_islamic_accessories/" target="_blank" class="hover:text-gold transition opacity-80"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
-    </footer>
+
+        <!-- Bottom Copyright -->
+        <div class="pt-12 border-t border-black/5 text-center">
+            <p class="text-[10px] uppercase tracking-[0.4em] opacity-40 font-bold">
+                &copy; 2026 Muhammad Bin Saqib | Maaz Bin Ayyub.
+            </p>
+        </div>
+    </div>
+</footer>
 
     <script>
-        let cart = [];
-        const WA_NUMBER = "923707107422";
+    let cart = [];
+    const WA_NUMBER = "923707107422";
 
-        function toggleTheme() {
-            const body = document.body;
-            const iconD = document.getElementById('theme-icon-desktop');
-            const iconM = document.getElementById('theme-icon-mobile');
-            const isDark = body.classList.toggle('dark-theme');
-            const newIcon = isDark ? 'fa-sun' : 'fa-moon';
-            if(iconD) iconD.className = `fa ${newIcon}`;
-            if(iconM) iconM.className = `fa ${newIcon}`;
-        }
+    // --- THEME & NAV ---
+    function toggleTheme() {
+        const body = document.body;
+        const iconD = document.getElementById('theme-icon-desktop');
+        const iconM = document.getElementById('theme-icon-mobile');
+        const isDark = body.classList.toggle('dark-theme');
+        const newIcon = isDark ? 'fa-sun' : 'fa-moon';
+        if(iconD) iconD.className = `fa ${newIcon}`;
+        if(iconM) iconM.className = `fa ${newIcon}`;
+    }
 
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
+    function toggleMobileMenu() { 
+        document.getElementById('mobile-menu').classList.toggle('active'); 
+    }
 
-        function showPage(id) {
-            document.querySelectorAll('.page-node').forEach(p => p.classList.remove('page-active'));
-            document.getElementById(id + '-page').classList.add('page-active');
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
+    function showPage(id) {
+        document.querySelectorAll('.page-node').forEach(p => p.classList.remove('page-active'));
+        document.getElementById(id + '-page').classList.add('page-active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        handleReveal(); // Scroll animation trigger
+    }
 
-        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
-        function openCheckout() { if(cart.length > 0) document.getElementById('checkout-modal').style.display = 'flex'; }
-        function closeCheckout() { document.getElementById('checkout-modal').style.display = 'none'; }
-
-        function addToCart(name, price, img, btn) {
-            cart.push({ name, price: parseInt(price.replace(/,/g, '')), img });
-            updateCartUI();
-            btn.innerText = "ADDED!";
-            setTimeout(() => btn.innerText = "ADD TO CART", 1000);
-            if(window.innerWidth > 1024) toggleCart();
-        }
-
-        function updateCartUI() {
-            const container = document.getElementById('cart-items');
-            document.getElementById('cart-count').innerText = cart.length;
-            let total = 0;
-            container.innerHTML = cart.map((item, index) => {
-                total += item.price;
-                return `<div class="flex items-center gap-4 bg-[var(--card)] p-4 rounded border border-gold/10">
-                    <img src="${item.img}" class="w-12 h-12 object-cover rounded">
-                    <div class="flex-grow"><h4 class="text-[10px] font-bold uppercase">${item.name}</h4><p class="text-gold text-xs">Rs. ${item.price.toLocaleString()}</p></div>
-                    <button onclick="removeItem(${index})" class="opacity-30 hover:text-red-500">&times;</button>
-                </div>`;
-            }).join('');
-            document.getElementById('cart-total').innerText = `Rs. ${total.toLocaleString()}`;
-        }
-
-        function removeItem(index) { cart.splice(index, 1); updateCartUI(); }
-
-        function handleFinalSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('cust-name').value;
-            const city = document.getElementById('cust-city').value;
-            const address = document.getElementById('cust-address').value;
-            const pay = document.querySelector('input[name="payment"]:checked').value;
-            let msg = `*MBS ORDER*\n------------------\n*Customer:* ${name}\n*City:* ${city}\n*Address:* ${address}\n*Payment:* ${pay}\n------------------\n*Items:*\n`;
-            let total = 0;
-            cart.forEach((item, i) => { msg += `${i+1}. ${item.name} (Rs. ${item.price.toLocaleString()})\n`; total += item.price; });
-            msg += `------------------\n*TOTAL: Rs. ${total.toLocaleString()}*`;
-            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-            closeCheckout();
-        }
-
-        function goToShop(sect) {
-            showPage('shop');
-            setTimeout(() => {
-                const el = document.getElementById(sect + '-sect');
-                if(el) window.scrollTo({top: el.offsetTop - 120, behavior: 'smooth'});
-            }, 200);
-        }
-
-        function generate() {
-    const sections = [
-        {
-            id: 'fragrances', title: 'Premium Attars', items: [
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" }
-            ]
-        },
-        {
-            id: 'imamaas', title: 'Royal Imamaas', items: [
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" }
-            ]
-        },
-        {
-            id: 'rugs', title: 'Salah Rugs', items: [
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" }
-            ]
-        },
-        {
-            id: 'counters', title: 'Digital Counters', items: [
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" }
-            ]
-        },
-        {
-            id: 'umrah', title: 'Umrah Boxes', items: [
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" }
-            ]
-        },
-        {
-            id: 'giftboxes', title: 'Islamic Gift Boxes', items: [
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" }
-            ]
-        },
-        {
-            id: 'tasbeeh', title: 'Premium Tasbeeh', items: [
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" },
-                { n: "Royal Musk", p: "3,500", i: "ceo.jpeg" }
-            ]
-        }
-    ];
-
-    const container = document.getElementById('shop-content');
-    container.innerHTML = ""; // Clear container first to avoid duplicates
-    
-    sections.forEach(sec => {
-        let html = `<section id="${sec.id}-sect" class="mb-24">
-            <h3 class="text-2xl serif italic text-gold mb-10 border-b border-gold/20 pb-4">${sec.title}</h3>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">`;
-        
-        sec.items.forEach(item => {
-            html += `<div class="p-card p-4 text-center rounded">
-                <img src="${item.i}" class="w-full h-60 object-cover mb-4 grayscale hover:grayscale-0 transition duration-500">
-                <h4 class="text-[10px] font-bold uppercase mb-1 truncate">${item.n}</h4>
-                <p class="text-gold text-xs font-bold mb-4">Rs. ${item.p}</p>
-                <button onclick="addToCart('${item.n}', '${item.p}', '${item.i}', this)" class="w-full py-3 border border-gold text-gold text-[9px] font-bold hover:bg-gold hover:text-black transition uppercase">Add to Cart</button>
-            </div>`;
-        });
-        
-        html += `</div></section>`;
-        container.innerHTML += html;
-    }); 
-} 
-
-        const dot = document.getElementById('cursor-dot');
-        const handleMove = (e) => {
-            const x = e.clientX || (e.touches && e.touches[0].clientX);
-            const y = e.clientY || (e.touches && e.touches[0].clientY);
-            if(dot && x && y) { dot.style.left = x + 'px'; dot.style.top = y + 'px'; }
-            if(x && y && Math.random() > 0.94) {
-                const p = document.createElement('div');
-                p.className = 'jasmine-petal';
-                p.style.left = x + 'px'; p.style.top = y + 'px';
-                const size = Math.random() * 8 + 4;
-                p.style.width = size + 'px'; p.style.height = size + 'px';
-                document.body.appendChild(p);
-                const anim = p.animate([{ transform: 'translate(0, 0) rotate(0deg)', opacity: 0.8 }, { transform: `translate(${(Math.random() - 0.5) * 100}px, ${Math.random() * 100 + 50}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }], { duration: 1500, easing: 'ease-out' });
-                anim.onfinish = () => p.remove();
+    // --- FOOTER HAMBURGER LOGIC ---
+    function toggleFooterSect(id) {
+        if (window.innerWidth < 768) { 
+            const sect = document.getElementById(id);
+            const icon = sect.previousElementSibling.querySelector('i');
+            
+            if (sect.classList.contains('hidden')) {
+                sect.classList.remove('hidden');
+                if(icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                sect.classList.add('hidden');
+                if(icon) icon.style.transform = 'rotate(0deg)';
             }
-        };
-        document.addEventListener('mousemove', handleMove);
-        document.addEventListener('touchmove', handleMove);
+        }
+    }
 
-        window.onload = generate;
-    </script>
+    // --- CART UI MODIFICATIONS (White Theme Like Order Details) ---
+    function toggleCart() { 
+        const cartSidebar = document.getElementById('cart-sidebar');
+        // Setting white background & dark text directly via JS for consistency
+        cartSidebar.style.backgroundColor = "#ffffff";
+        cartSidebar.style.color = "#1A1A1A";
+        cartSidebar.classList.toggle('open'); 
+    }
+
+    function updateCartUI() {
+        const container = document.getElementById('cart-items');
+        document.getElementById('cart-count').innerText = cart.length;
+        let total = 0;
+        
+        container.innerHTML = cart.map((item, index) => {
+            total += item.price;
+            return `
+            <div class="flex items-center gap-4 bg-gray-50 p-4 rounded border border-gray-100 mb-3 shadow-sm">
+                <img src="${item.img}" class="w-14 h-14 object-cover rounded shadow-sm">
+                <div class="flex-grow">
+                    <h4 class="text-[11px] font-bold uppercase text-black mb-1">${item.name}</h4>
+                    <p class="text-gold text-xs font-bold">Rs. ${item.price.toLocaleString()}</p>
+                </div>
+                <button onclick="removeItem(${index})" class="text-gray-400 hover:text-red-500 transition-colors text-xl">&times;</button>
+            </div>`;
+        }).join('');
+        
+        document.getElementById('cart-total').innerText = `Rs. ${total.toLocaleString()}`;
+        document.getElementById('cart-total').style.color = "#C5A059"; // Gold total price
+    }
+
+    function openCheckout() { 
+        if(cart.length > 0) document.getElementById('checkout-modal').style.display = 'flex'; 
+    }
+    
+    function closeCheckout() { 
+        document.getElementById('checkout-modal').style.display = 'none'; 
+    }
+
+    // --- CART LOGIC ---
+    function addToCart(name, price, img, btn) {
+        cart.push({ name, price: parseInt(price.replace(/,/g, '')), img });
+        updateCartUI();
+        btn.innerText = "ADDED!";
+        btn.style.backgroundColor = "#C5A059";
+        btn.style.color = "black";
+        
+        setTimeout(() => {
+            btn.innerText = "ADD TO CART";
+            btn.style.backgroundColor = "";
+            btn.style.color = "";
+        }, 1000);
+
+        if(window.innerWidth > 1024) {
+            toggleCart();
+            document.getElementById('cart-sidebar').classList.add('open');
+        }
+    }
+
+    function removeItem(index) { 
+        cart.splice(index, 1); 
+        updateCartUI(); 
+    }
+
+    function handleFinalSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('cust-name').value;
+        const city = document.getElementById('cust-city').value;
+        const address = document.getElementById('cust-address').value;
+        const pay = document.querySelector('input[name="payment"]:checked').value;
+        
+        let msg = `*MBS ORDER*\n------------------\n*Customer:* ${name}\n*City:* ${city}\n*Address:* ${address}\n*Payment:* ${pay}\n------------------\n*Items:*\n`;
+        let total = 0;
+        cart.forEach((item, i) => { 
+            msg += `${i+1}. ${item.name} (Rs. ${item.price.toLocaleString()})\n`; 
+            total += item.price; 
+        });
+        msg += `------------------\n*TOTAL: Rs. ${total.toLocaleString()}*`;
+        
+        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+        closeCheckout();
+    }
+
+    function goToShop(sect) {
+        showPage('shop');
+        setTimeout(() => {
+            const el = document.getElementById(sect + '-sect');
+            if(el) window.scrollTo({top: el.offsetTop - 120, behavior: 'smooth'});
+        }, 200);
+    }
+
+    // --- GENERATE PRODUCTS ---
+    function generate() {
+        const sections = [
+            { id: 'fragrances', title: 'Premium Attars', items: Array(8).fill({n: "Royal Musk", p: "3,500", i: "ceo.jpeg"}) },
+            { id: 'imamaas', title: 'Royal Imamaas', items: Array(4).fill({n: "Cotton Imama", p: "1,800", i: "ceo.jpeg"}) },
+            { id: 'rugs', title: 'Salah Rugs', items: Array(4).fill({n: "Velvet Rug", p: "5,000", i: "ceo.jpeg"}) }
+        ];
+
+        const container = document.getElementById('shop-content');
+        if(!container) return;
+        container.innerHTML = "";
+        
+        sections.forEach(sec => {
+            let html = `<section id="${sec.id}-sect" class="mb-24 reveal">
+                <h3 class="text-2xl serif italic text-gold mb-10 border-b border-gold/20 pb-4">${sec.title}</h3>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">`;
+            
+            sec.items.forEach(item => {
+                html += `
+                <div class="p-card p-4 text-center rounded">
+                    <img src="${item.i}" class="w-full h-60 object-cover mb-4 grayscale hover:grayscale-0 transition duration-500">
+                    <h4 class="text-[10px] font-bold uppercase mb-1 truncate">${item.n}</h4>
+                    <p class="text-gold text-xs font-bold mb-4">Rs. ${item.p}</p>
+                    <button onclick="addToCart('${item.n}', '${item.p}', '${item.i}', this)" class="w-full py-3 border border-gold text-gold text-[9px] font-bold hover:bg-gold hover:text-black transition uppercase">Add to Cart</button>
+                </div>`;
+            });
+            html += `</div></section>`;
+            container.innerHTML += html;
+        });
+        handleReveal();
+    }
+
+    // --- SCROLL REVEAL ANIMATION ---
+    function handleReveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveals[i].getBoundingClientRect().top;
+            const elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add('active');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', handleReveal);
+    window.onload = generate;
+</script>
 </body>
 </html>
