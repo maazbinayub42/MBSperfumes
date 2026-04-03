@@ -15,7 +15,7 @@
     <style>
         :root { 
             --gold: #C5A059;          
-            --bg: #e7c29c;            
+            --bg: #a5896f;            
             --text: #1A1A1A;          
             --card: #FFFFFF;          
             --border: rgba(197, 160, 89, 0.3); 
@@ -31,106 +31,60 @@
             --nav-bg: rgba(15, 15, 15, 0.98);
         }
 
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background-color: var(--bg); 
-            color: var(--text); 
-            transition: background 0.4s, color 0.4s;
-            overflow-x: hidden; 
-        }
-
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); transition: background 0.4s, color 0.4s; overflow-x: hidden; }
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         header { background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 100; }
-        
-        .nav-link { 
-            cursor: pointer; font-size: 10px; letter-spacing: 3px;
-            text-transform: uppercase; font-weight: 700; transition: 0.3s; color: var(--text); 
-            position: relative;
-        }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
-            background: var(--gold); transition: 0.3s;
-        }
+        .nav-link { cursor: pointer; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; transition: 0.3s; color: var(--text); position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--gold); transition: 0.3s; }
         .nav-link:hover::after { width: 100%; }
         .nav-link:hover { color: var(--gold); }
 
-        .dropdown { position: relative; display: inline-block; }
-        .dropdown-content {
-            display: none; position: absolute; background: var(--card); min-width: 200px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid var(--gold); z-index: 110;
-        }
-        .dropdown-content span { color: var(--text); padding: 12px 16px; display: block; font-size: 10px; text-transform: uppercase; cursor: pointer; }
-        .dropdown-content span:hover { background: var(--gold); color: black; }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        #mobile-menu {
-            position: fixed; top: 0; left: -100%; width: 85%; height: 100%;
-            background: var(--bg); z-index: 1000; transition: 0.4s;
-            border-right: 1px solid var(--gold); padding: 40px 20px;
-            overflow-y: auto;
-        }
+        #mobile-menu { position: fixed; top: 0; left: -100%; width: 85%; height: 100%; background: var(--bg); z-index: 1000; transition: 0.4s; border-right: 1px solid var(--gold); padding: 40px 20px; overflow-y: auto; }
         #mobile-menu.active { left: 0; }
         .mobile-link { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text); border-bottom: 1px solid var(--border); padding: 15px 0; }
 
         .page-node { display: none; }
         .page-active { display: block; }
 
-        .hero-banner {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1616984748474-279603f92691?auto=format&fit=crop&q=80&w=1600');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
-
         .p-card { background: var(--card); border: 1px solid var(--border); transition: var(--transition); }
         .p-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         
-        #cart-sidebar {
-            position: fixed; top: 0; right: -450px; width: 100%; max-width: 380px; height: 100%;
-            background: #ffffff; color: #1A1A1A; border-left: 2px solid var(--gold); z-index: 2000; transition: 0.5s;
-        }
+        #cart-sidebar { position: fixed; top: 0; right: -450px; width: 100%; max-width: 380px; height: 100%; background: #ffffff; color: #1A1A1A; border-left: 2px solid var(--gold); z-index: 2000; transition: 0.5s; box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
         #cart-sidebar.open { right: 0; }
 
-        /* --- ADDED: Pointer Arrow Style --- */
-        #checkout-pointer {
-            position: absolute; top: 55px; right: 0; background: #000; color: #fff;
-            padding: 8px 12px; border-radius: 4px; font-size: 9px; font-weight: bold;
-            white-space: nowrap; display: none; animation: bounce 1s infinite; z-index: 500;
-        }
-        #checkout-pointer::after {
-            content: ''; position: absolute; top: -6px; right: 15px;
-            border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #000;
-        }
+        #checkout-pointer { position: absolute; top: 55px; right: 0; background: #000; color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 9px; font-weight: bold; white-space: nowrap; display: none; animation: bounce 1s infinite; z-index: 500; }
+        #checkout-pointer::after { content: ''; position: absolute; top: -6px; right: 15px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #000; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
-        /* --- ADDED: Online Msg Style --- */
-        #online-msg {
-            display: none; background: #fff8e6; border: 1px dashed var(--gold);
-            padding: 10px; font-size: 11px; color: #856404; margin-top: 10px; font-weight: bold;
-        }
+        #online-msg { display: none; background: #fff8e6; border: 1px dashed var(--gold); padding: 10px; font-size: 11px; color: #856404; margin-top: 10px; font-weight: bold; }
 
-        #checkout-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px); z-index: 3000; display: none; align-items: center; justify-content: center;
-        }
-        .checkout-card {
-            background: #ffffff; color: #1A1A1A; padding: 40px; width: 100%; max-width: 450px;
-            border: 2px solid var(--gold); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        .luxury-input { 
-            background: transparent; border-bottom: 2px solid #ddd; padding: 12px 0; width: 100%; 
-            color: #1A1A1A; font-size: 13px; font-weight: 600; outline: none; margin-bottom: 20px;
-        }
+        #checkout-modal, #product-detail-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .checkout-card { background: #ffffff; color: #1A1A1A; padding: 40px; width: 100%; max-width: 450px; border: 2px solid var(--gold); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .luxury-input { background: transparent; border-bottom: 2px solid #ddd; padding: 12px 0; width: 100%; color: #1A1A1A; font-size: 13px; font-weight: 600; outline: none; margin-bottom: 20px; }
         .luxury-input:focus { border-bottom: 2px solid var(--gold); }
+
+        /* Detail Modal Styling */
+        .detail-card { background: #ffffff; color: #1A1A1A; width: 100%; max-width: 700px; display: flex; flex-direction: column; md:flex-row; position: relative; border: 2px solid var(--gold); }
+        .detail-left { flex: 1; background: #f9f9f9; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .detail-right { flex: 1.2; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+        
+        /* Thumbnail Styling */
+        .thumb-row { display: flex; gap: 8px; margin-top: 15px; }
+        .thumb-box { width: 50px; height: 50px; border: 1px solid #ddd; cursor: pointer; transition: 0.3s; opacity: 0.6; }
+        .thumb-box:hover, .thumb-box.active { opacity: 1; border-color: var(--gold); }
+
+        .qty-box { display: flex; align-items: center; border: 1px solid #eee; width: fit-content; margin-bottom: 20px; background: #f9f9f9; }
+        .qty-btn { padding: 5px 15px; cursor: pointer; font-weight: bold; }
+        .qty-input { width: 40px; text-align: center; border: none; background: transparent; font-weight: bold; }
+
+        .cancel-btn { width: 100%; background: #f1f1f1; color: #666; py: 3; font-weight: bold; text-transform: uppercase; font-size: 10px; margin-top: 12px; transition: 0.3s; border: 1px solid #ddd; }
+        .cancel-btn:hover { background: #ff4444; color: white; border-color: #ff4444; }
+
+        @media (max-width: 768px) { .detail-card { flex-direction: column; max-height: 85vh; overflow-y: auto; } }
     </style>
 </head>
 <body class="light-theme">
@@ -145,31 +99,50 @@
                 <span onclick="goToShop('fragrances')" class="nav-link">Attars</span>
                 <span onclick="goToShop('imamaas')" class="nav-link">Imamaas</span>
                 <span onclick="goToShop('rugs')" class="nav-link">Salah Rugs</span>
-                <div class="dropdown">
-                    <span class="nav-link">Others <i class="fa fa-chevron-down text-[7px] ml-1"></i></span>
-                    <div class="dropdown-content">
-                        <span onclick="goToShop('counters')">Digital Counters</span>
-                        <span onclick="goToShop('umrah')">Umrah Boxes</span>
-                        <span onclick="goToShop('giftboxes')">Islamic Gift Boxes</span>
-                        <span onclick="goToShop('tasbeeh')">Premium Tasbeeh</span>
-                    </div>
-                </div>
                 <span onclick="showPage('about')" class="nav-link">About Us</span>
                 <span onclick="showPage('contact')" class="nav-link">Contact</span>
             </nav>
 
             <div class="flex items-center space-x-6">
-                <button onclick="toggleTheme()" class="text-lg hover:text-gold transition hidden lg:inline-block"><i id="theme-icon-desktop" class="fa fa-moon"></i></button>
                 <button onclick="toggleCart()" class="relative hover:text-gold transition">
                     <i class="fa fa-shopping-bag text-xl"></i>
                     <span id="cart-count" class="absolute -top-2 -right-2 bg-gold text-black text-[10px] font-bold px-1.5 rounded-full">0</span>
-                    <!-- ADDED: Pointer -->
                     <div id="checkout-pointer">Proceed to Checkout Click Here ↓</div>
                 </button>
             </div>
         </div>
     </header>
 
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-detail-modal">
+        <div class="detail-card">
+            <button onclick="closeProductDetail()" class="absolute top-4 right-4 text-2xl z-20 text-black hover:text-gold transition">&times;</button>
+            <div class="detail-left">
+                <img id="detail-img" src="" class="max-h-[250px] w-full object-contain mb-4">
+                <!-- 4 Thumbnails Added -->
+                <div class="thumb-row" id="detail-thumbs">
+                    <!-- JS will fill this -->
+                </div>
+            </div>
+            <div class="detail-right">
+                <h4 id="detail-category" class="text-gold uppercase tracking-widest text-[9px] font-bold mb-2">Category</h4>
+                <h2 id="detail-name" class="text-3xl serif italic mb-4">Product Name</h2>
+                <p class="text-gray-500 text-xs leading-relaxed mb-6">Premium selection from MBS. Blending spiritual tradition with artisanal excellence.</p>
+                <h3 id="detail-price" class="text-xl font-bold text-black mb-6">Rs. 0</h3>
+                
+                <div class="flex items-center gap-4">
+                    <div class="qty-box">
+                        <div class="qty-btn" onclick="updateDetailQty(-1)">-</div>
+                        <input type="text" id="detail-qty" value="1" class="qty-input" readonly>
+                        <div class="qty-btn" onclick="updateDetailQty(1)">+</div>
+                    </div>
+                    <button id="detail-add-btn" class="flex-grow bg-black text-white py-3 font-bold uppercase text-[10px] tracking-widest hover:bg-gold hover:text-black transition duration-300">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
     <div id="mobile-menu">
         <div class="flex justify-between items-center mb-10">
             <img src="logo.png" class="h-8">
@@ -179,17 +152,11 @@
         <span onclick="goToShop('fragrances'); toggleMobileMenu()" class="mobile-link">Attars</span>
         <span onclick="goToShop('imamaas'); toggleMobileMenu()" class="mobile-link">Imamaas</span>
         <span onclick="goToShop('rugs'); toggleMobileMenu()" class="mobile-link">Salah Rugs</span>
-        <span onclick="goToShop('counters'); toggleMobileMenu()" class="mobile-link">Counters</span>
-        <span onclick="goToShop('umrah'); toggleMobileMenu()" class="mobile-link">Umrah Boxes</span>
-        <span onclick="goToShop('giftboxes'); toggleMobileMenu()" class="mobile-link">Gift Boxes</span>
-        <span onclick="goToShop('tasbeeh'); toggleMobileMenu()" class="mobile-link">Tasbeeh</span>
         <span onclick="showPage('about'); toggleMobileMenu()" class="mobile-link">About Us</span>
         <span onclick="showPage('contact'); toggleMobileMenu()" class="mobile-link">Contact</span>
-        <button onclick="toggleTheme(); toggleMobileMenu()" class="mt-10 text-[10px] uppercase font-bold flex items-center gap-3">
-            <i id="theme-icon-mobile" class="fa fa-moon"></i> Switch Theme
-        </button>
     </div>
 
+    <!-- Cart Sidebar -->
     <div id="cart-sidebar" class="flex flex-col">
         <div class="p-8 border-b border-gold/20 flex justify-between items-center">
             <h3 class="serif italic text-2xl text-gold">My Selection</h3>
@@ -198,13 +165,14 @@
         <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4"></div>
         <div class="p-8 border-t border-gold/20">
             <div class="flex justify-between mb-6">
-                <span class="opacity-50 uppercase text-[10px] text-black">Total Amount</span>
+                <span class="text-black font-bold uppercase text-[10px]">Total Amount</span>
                 <span id="cart-total" class="text-gold font-bold text-xl">Rs. 0</span>
             </div>
-            <button onclick="openCheckout()" class="w-full bg-black text-white py-5 font-bold uppercase text-[11px] hover:bg-gold hover:text-black transition duration-300">Proceed to Checkout</button>
+            <button onclick="openCheckout()" class="w-full bg-black text-white py-5 font-bold uppercase text-[11px] hover:bg-gold hover:text-black transition">Proceed to Checkout</button>
         </div>
     </div>
 
+    <!-- Checkout Modal -->
     <div id="checkout-modal">
         <div class="checkout-card relative">
             <button onclick="closeCheckout()" class="absolute top-4 right-4 text-2xl opacity-50">&times;</button>
@@ -219,22 +187,20 @@
                         <label class="text-[12px] flex items-center gap-2 cursor-pointer font-bold"><input type="radio" name="payment" value="COD" checked onclick="togglePayMsg(false)" class="accent-gold w-4 h-4"> COD</label>
                         <label class="text-[12px] flex items-center gap-2 cursor-pointer font-bold"><input type="radio" name="payment" value="Online" onclick="togglePayMsg(true)" class="accent-gold w-4 h-4"> Online</label>
                     </div>
-                    <!-- ADDED: Online Msg -->
-                    <div id="online-msg">
-                        ⚠️ Payment Online Account (EasyPesa): Same Number. <br>
-                        Please send a screenshot of the receipt on WhatsApp.
-                    </div>
+                    <div id="online-msg">⚠️ EasyPesa: Same Number. <br> Send screenshot on WhatsApp.</div>
                 </div>
-                <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-[11px] mt-6 hover:bg-gold transition duration-300">Place Order via WhatsApp</button>
+                <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-[11px] hover:bg-gold transition">Place Order via WhatsApp</button>
+                <!-- Cancel Order Option -->
+                <button type="button" onclick="cancelOrder()" class="cancel-btn py-3">Cancel Order</button>
             </form>
         </div>
     </div>
 
+    <!-- Home Page -->
     <main id="home-page" class="page-node page-active">
         <section class="hero-banner h-[100vh] flex flex-col items-center justify-center text-center px-6 relative">
-            <h2 class="text-6xl md:text-9xl mb-6 serif italic leading-tight text-white drop-shadow-2xl reveal">Elegance Meets <br> The <span class="text-gold">Fragrance</span></h2>
-            <p class="text-white/80 uppercase tracking-[0.6em] text-[11px] mb-14 font-black reveal">Muhammad Bin Saqib | Signature Collection</p>
-            <button onclick="goToShop('fragrances')" class="border-2 border-gold text-gold font-bold tracking-[0.4em] px-16 py-5 hover:bg-gold hover:text-black transition uppercase text-xs reveal">Explore Catalog</button>
+            <h2 class="text-6xl md:text-9xl mb-6 serif italic leading-tight text-white reveal">Elegance Meets <br> The <span class="text-gold">Fragrance</span></h2>
+            <button onclick="goToShop('fragrances')" class="border-2 border-gold text-gold font-bold px-16 py-5 hover:bg-gold hover:text-black transition uppercase text-xs reveal">Explore Catalog</button>
         </section>
     </main>
 
@@ -256,11 +222,13 @@
                         <p class="text-gold uppercase tracking-widest text-sm font-black italic">Founder & CEO of MBS</p>
                     </div>
                     <div class="opacity-80 leading-relaxed font-medium text-lg space-y-8">
-                        <p>Dedicated to creating a premium fragrance and Islamic lifestyle brand, aligning with Seerah and Sunnah.</p>
+                        <p>Dedicated to creating a premium fragrance and Islamic lifestyle brand.</p>
                     </div>
                 </div>
-                <div class="w-full lg:w-1/2">
-                    <img src="ceo.jpeg" class="w-full h-[500px] object-cover rounded shadow-2xl">
+                <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                    <div class="relative z-10 bg-[var(--card)] p-2 border border-gold/20 shadow-2xl">
+                        <img src="ceo.jpeg" class="w-80 h-[450px] object-cover">
+                    </div>
                 </div>
             </div>
         </div>
@@ -269,47 +237,25 @@
     <main id="contact-page" class="page-node pt-40 pb-24">
         <div class="container mx-auto px-6 max-w-5xl text-center reveal">
             <h2 class="text-6xl serif italic mb-6 text-gold">Contact Us</h2>
-            <p class="text-gray-500 uppercase tracking-[0.5em] text-xs font-black mb-24">Get in Touch with MBS</p>
-            <div class="grid md:grid-cols-2 gap-16 text-left">
-                <div class="space-y-10">
-                    <div class="bg-white p-8 border-l-8 border-gold shadow-xl">
-                        <h3 class="text-xl text-gold serif italic mb-6">WhatsApp Support</h3>
-                        <a href="https://wa.me/923707107422" target="_blank" class="flex items-center group">
-                            <i class="fab fa-whatsapp text-4xl text-green-600 mr-4 group-hover:scale-110 transition"></i>
-                            <p class="text-2xl font-black text-black">+92 370 7107422</p>
-                        </a>
-                    </div>
-                    <div class="space-y-8 pl-4">
-                        <div class="flex items-start">
-                            <i class="fa fa-envelope mt-1 mr-4 text-gold text-lg"></i>
-                            <div>
-                                <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Email Address</p>
-                                <p class="text-black font-semibold">mbsislamicaccessories@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <i class="fa fa-map-marker-alt mt-1 mr-4 text-gold text-lg"></i>
-                            <div>
-                                <p class="text-[10px] uppercase font-bold text-gray-400 tracking-widest">Our Location</p>
-                                <a href="https://maps.app.goo.gl/CQzKdfCSbcFvJPnG8" target="_blank" class="text-black font-semibold hover:text-gold transition leading-relaxed">
-                                    Shop #2, Gulshanabad Adyala Road,<br>Askari 14 Rawalpindi, Pakistan
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+            <div class="grid md:grid-cols-2 gap-16 text-left mt-24">
+                <div>
+                    <h3 class="text-xl text-gold serif italic mb-6">WhatsApp Support</h3>
+                    <a href="https://wa.me/923707107422" target="_blank" class="text-2xl font-black text-black">+92 370 7107422</a>
+                    <p class="mt-8"><i class="fa fa-envelope mr-4 text-gold"></i> mbsislamicaccessories@gmail.com</p>
+                    <a href="https://maps.app.goo.gl/CQzKdfCSbcFvJPnG8" target="_blank" class="block mt-4"><i class="fa fa-map-marker-alt mr-4 text-gold"></i> Shop #2, Adyala Road, Rawalpindi</a>
                 </div>
                 <div class="bg-white p-10 border border-gold/20 shadow-2xl">
-                    <h3 class="text-xl serif italic mb-8 text-black">Quick Message</h3>
                     <form action="https://formspree.io/f/mkoqdyry" method="POST" class="space-y-6">
-                        <input type="text" name="name" placeholder="YOUR NAME" class="luxury-input" required style="color:#1a1a1a; border-bottom: 2px solid #eee">
-                        <textarea name="message" rows="4" placeholder="HOW CAN WE HELP?" class="luxury-input" required style="color:#1a1a1a; border-bottom: 2px solid #eee"></textarea>
-                        <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-xs tracking-widest hover:bg-gold hover:text-black transition duration-300">Send Message</button>
+                        <input type="text" name="name" placeholder="YOUR NAME" class="luxury-input" required>
+                        <textarea name="message" rows="4" placeholder="HOW CAN WE HELP?" class="luxury-input" required></textarea>
+                        <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-xs">Send Message</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
 
+    
     <footer class="border-t border-gold/20 py-20 bg-[var(--bg)] reveal">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -351,19 +297,9 @@
     <script>
     let cart = [];
     const WA_NUMBER = "923707107422";
-
-    function toggleTheme() {
-        const body = document.body;
-        const iconD = document.getElementById('theme-icon-desktop');
-        const iconM = document.getElementById('theme-icon-mobile');
-        const isDark = body.classList.toggle('dark-theme');
-        const newIcon = isDark ? 'fa-sun' : 'fa-moon';
-        if(iconD) iconD.className = `fa ${newIcon}`;
-        if(iconM) iconM.className = `fa ${newIcon}`;
-    }
+    let allProducts = [];
 
     function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
-
     function showPage(id) {
         document.querySelectorAll('.page-node').forEach(p => p.classList.remove('page-active'));
         document.getElementById(id + '-page').classList.add('page-active');
@@ -371,92 +307,99 @@
         handleReveal();
     }
 
-    function toggleFooterSect(id) {
-        if (window.innerWidth < 768) { 
-            const sect = document.getElementById(id);
-            const icon = sect.previousElementSibling.querySelector('i');
-            if (sect.classList.contains('hidden')) {
-                sect.classList.remove('hidden');
-                if(icon) icon.style.transform = 'rotate(180deg)';
-            } else {
-                sect.classList.add('hidden');
-                if(icon) icon.style.transform = 'rotate(0deg)';
-            }
-        }
-    }
-
     function toggleCart() { 
-        const cartSidebar = document.getElementById('cart-sidebar');
-        cartSidebar.style.backgroundColor = "#ffffff";
-        cartSidebar.style.color = "#1A1A1A";
-        cartSidebar.classList.toggle('open'); 
+        const sidebar = document.getElementById('cart-sidebar');
+        sidebar.style.backgroundColor = "#ffffff";
+        sidebar.classList.toggle('open'); 
     }
 
     function updateCartUI() {
         const container = document.getElementById('cart-items');
-        document.getElementById('cart-count').innerText = cart.length;
+        document.getElementById('cart-count').innerText = cart.reduce((acc, item) => acc + item.qty, 0);
         let total = 0;
         container.innerHTML = cart.map((item, index) => {
-            total += item.price;
-            return `
-            <div class="flex items-center gap-4 bg-gray-50 p-4 rounded border border-gray-100 mb-3 shadow-sm">
-                <img src="${item.img}" class="w-14 h-14 object-cover rounded shadow-sm">
+            total += item.price * item.qty;
+            return `<div class="flex items-center gap-4 bg-gray-50 p-4 rounded border border-gray-100 mb-3 shadow-sm">
+                <img src="${item.img}" class="w-14 h-14 object-cover rounded">
                 <div class="flex-grow">
                     <h4 class="text-[11px] font-bold uppercase text-black mb-1">${item.name}</h4>
-                    <p class="text-gold text-xs font-bold">Rs. ${item.price.toLocaleString()}</p>
+                    <p class="text-gold text-xs font-bold">${item.qty} x Rs. ${item.price.toLocaleString()}</p>
                 </div>
-                <button onclick="removeItem(${index})" class="text-gray-400 hover:text-red-500 transition-colors text-xl">&times;</button>
+                <button onclick="removeItem(${index})" class="text-gray-400 hover:text-red-500 text-xl">&times;</button>
             </div>`;
         }).join('');
         document.getElementById('cart-total').innerText = `Rs. ${total.toLocaleString()}`;
-        document.getElementById('cart-total').style.color = "#C5A059";
     }
 
-    function openCheckout() { if(cart.length > 0) document.getElementById('checkout-modal').style.display = 'flex'; }
-    function closeCheckout() { document.getElementById('checkout-modal').style.display = 'none'; }
-
-    // --- UPDATED: addToCart with Pointer logic ---
-    function addToCart(name, price, img, btn) {
-        cart.push({ name, price: parseInt(price.replace(/,/g, '')), img });
+    function addToCart(name, price, img, qty = 1) {
+        const existing = cart.find(i => i.name === name);
+        if(existing) { existing.qty += qty; } 
+        else { cart.push({ name, price: parseInt(price.toString().replace(/,/g, '')), img, qty }); }
         updateCartUI();
-        btn.innerText = "ADDED!";
-        btn.style.backgroundColor = "#C5A059";
-        btn.style.color = "black";
-        
-        // Show pointer
         const pointer = document.getElementById('checkout-pointer');
         if(pointer) pointer.style.display = 'block';
-
-        setTimeout(() => {
-            btn.innerText = "ADD TO CART";
-            btn.style.backgroundColor = "";
-            btn.style.color = "";
-            if(pointer) pointer.style.display = 'none';
-        }, 3000);
-
-        if(window.innerWidth > 1024) {
-            document.getElementById('cart-sidebar').classList.add('open');
-        }
+        setTimeout(() => { if(pointer) pointer.style.display = 'none'; }, 3000);
+        if(window.innerWidth > 1024) document.getElementById('cart-sidebar').classList.add('open');
     }
 
     function removeItem(index) { cart.splice(index, 1); updateCartUI(); }
+    function openCheckout() { if(cart.length > 0) document.getElementById('checkout-modal').style.display = 'flex'; }
+    function closeCheckout() { document.getElementById('checkout-modal').style.display = 'none'; }
+    function togglePayMsg(show) { document.getElementById('online-msg').style.display = show ? 'block' : 'none'; }
 
-    // --- ADDED: Pay Msg Toggle ---
-    function togglePayMsg(show) {
-        const msg = document.getElementById('online-msg');
-        if(msg) msg.style.display = show ? 'block' : 'none';
+    // CANCEL ORDER FUNCTION
+    function cancelOrder() {
+        cart = [];
+        updateCartUI();
+        closeCheckout();
+        alert("Order Cancelled. Cart has been cleared.");
+    }
+
+    // PRODUCT DETAIL LOGIC
+    function openProductDetail(index) {
+        const p = allProducts[index];
+        const mainImg = document.getElementById('detail-img');
+        mainImg.src = p.i;
+        document.getElementById('detail-name').innerText = p.n;
+        document.getElementById('detail-price').innerText = `Rs. ${p.p}`;
+        document.getElementById('detail-category').innerText = p.cat;
+        document.getElementById('detail-qty').value = 1;
+        
+        // Add 4 thumbnails (repeating same image for demo)
+        const thumbRow = document.getElementById('detail-thumbs');
+        thumbRow.innerHTML = '';
+        for(let i=0; i<4; i++) {
+            const thumb = document.createElement('img');
+            thumb.src = p.i;
+            thumb.className = `thumb-box ${i===0 ? 'active' : ''}`;
+            thumbRow.appendChild(thumb);
+        }
+
+        document.getElementById('detail-add-btn').onclick = () => {
+            const q = parseInt(document.getElementById('detail-qty').value);
+            addToCart(p.n, p.p, p.i, q);
+            closeProductDetail();
+        };
+        document.getElementById('product-detail-modal').style.display = 'flex';
+    }
+
+    function closeProductDetail() { document.getElementById('product-detail-modal').style.display = 'none'; }
+    function updateDetailQty(val) {
+        let input = document.getElementById('detail-qty');
+        let newQty = parseInt(input.value) + val;
+        if(newQty >= 1) input.value = newQty;
     }
 
     function handleFinalSubmit(e) {
         e.preventDefault();
-        const name = document.getElementById('cust-name').value;
-        const city = document.getElementById('cust-city').value;
-        const address = document.getElementById('cust-address').value;
-        const pay = document.querySelector('input[name="payment"]:checked').value;
-        let msg = `*MBS ORDER*\n------------------\n*Customer:* ${name}\n*City:* ${city}\n*Address:* ${address}\n*Payment:* ${pay}\n------------------\n*Items:*\n`;
+        const n = document.getElementById('cust-name').value;
+        const c = document.getElementById('cust-city').value;
+        const a = document.getElementById('cust-address').value;
+        const p = document.querySelector('input[name="payment"]:checked').value;
+        let msg = `*MBS ORDER*\nCustomer: ${n}\nCity: ${c}\nAddress: ${a}\nPayment: ${p}\nItems:\n`;
         let total = 0;
-        cart.forEach((item, i) => { msg += `${i+1}. ${item.name} (Rs. ${item.price.toLocaleString()})\n`; total += item.price; });
-        msg += `------------------\n*TOTAL: Rs. ${total.toLocaleString()}*`;
+        cart.forEach(i => { msg += `- ${i.name} x${i.qty} (Rs. ${i.price.toLocaleString()})\n`; total += i.price * i.qty; });
+        msg += `TOTAL: Rs. ${total.toLocaleString()}`;
         window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
         closeCheckout();
     }
@@ -473,19 +416,22 @@
         const sections = [
             { id: 'fragrances', title: 'Premium Attars', items: Array(8).fill({n: "Royal Musk", p: "3,500", i: "ceo.jpeg"}) },
             { id: 'imamaas', title: 'Royal Imamaas', items: Array(4).fill({n: "Cotton Imama", p: "1,800", i: "ceo.jpeg"}) },
-            { id: 'rugs', title: 'Salah Rugs', items: Array(4).fill({n: "Velvet Rug", p: "5,000", i: "ceo.jpeg"}) },
-            { id: 'counters', title: 'Digital Counters', items: Array(4).fill({n: "Digital Counter", p: "500", i: "ceo.jpeg"}) },
-            { id: 'umrah', title: 'Umrah Boxes', items: Array(2).fill({n: "Umrah Box", p: "10,000", i: "ceo.jpeg"}) },
-            { id: 'giftboxes', title: 'Gift Boxes', items: Array(2).fill({n: "Gift Box", p: "7,500", i: "ceo.jpeg"}) },
-            { id: 'tasbeeh', title: 'Tasbeeh', items: Array(4).fill({n: "Tasbeeh", p: "1,200", i: "ceo.jpeg"}) }
+            { id: 'rugs', title: 'Salah Rugs', items: Array(4).fill({n: "Velvet Rug", p: "5,000", i: "ceo.jpeg"}) }
         ];
         const container = document.getElementById('shop-content');
-        if(!container) return;
         container.innerHTML = "";
+        allProducts = [];
         sections.forEach(sec => {
             let html = `<section id="${sec.id}-sect" class="mb-24 reveal"><h3 class="text-2xl serif italic text-gold mb-10 border-b border-gold/20 pb-4">${sec.title}</h3><div class="grid grid-cols-2 lg:grid-cols-4 gap-8">`;
             sec.items.forEach(item => {
-                html += `<div class="p-card p-4 text-center rounded"><img src="${item.i}" class="w-full h-60 object-cover mb-4 grayscale hover:grayscale-0 transition duration-500"><h4 class="text-[10px] font-bold uppercase mb-1 truncate">${item.n}</h4><p class="text-gold text-xs font-bold mb-4">Rs. ${item.p}</p><button onclick="addToCart('${item.n}', '${item.p}', '${item.i}', this)" class="w-full py-3 border border-gold text-gold text-[9px] font-bold hover:bg-gold hover:text-black transition uppercase">Add to Cart</button></div>`;
+                const idx = allProducts.length;
+                allProducts.push({...item, cat: sec.title});
+                html += `<div class="p-card p-4 text-center rounded">
+                    <img src="${item.i}" onclick="openProductDetail(${idx})" class="w-full h-60 object-cover mb-4 grayscale hover:grayscale-0 transition duration-500 cursor-pointer">
+                    <h4 class="text-[10px] font-bold uppercase mb-1 truncate">${item.n}</h4>
+                    <p class="text-gold text-xs font-bold mb-4">Rs. ${item.p}</p>
+                    <button onclick="addToCart('${item.n}', '${item.p}', '${item.i}')" class="w-full py-3 border border-gold text-gold text-[9px] font-bold hover:bg-gold hover:text-black transition uppercase">Add to Cart</button>
+                </div>`;
             });
             html += `</div></section>`;
             container.innerHTML += html;
