@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & META TAGS -->
     <title>MBS | Muhammad Bin Saqib - Fragrance & Faith</title>
+    <meta name="description" content="MBS (Muhammad Bin Saqib) - Premium Islamic accessories, authentic attars, imamaas, and luxury salah rugs. Redefining Islamic luxury through spiritual heritage.">
+    <meta name="keywords" content="MBS, Muhammad Bin Saqib, Attar, Islamic Accessories, Fragrance, Salah Rugs, Imama, Muslim Luxury Brand">
+    <meta name="author" content="MBS | Maaz Bin Ayyub">
+    
+    <!-- GOOGLE SEARCH CONSOLE -->
+    <meta name="google-site-verification" content="Y3F2S0IvVAeJmSNWqodDr8X-lKbVPPGqdBR3cSHmpYw" />
+
     <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,27 +21,33 @@
     <style>
         :root { 
             --gold: #C5A059;          
-            --bg: #8f755c;            
+            --bg: #fdfaf7;            
             --text: #1A1A1A;          
             --card: #FFFFFF;          
             --border: rgba(197, 160, 89, 0.3); 
             --nav-bg: rgba(252, 251, 250, 0.98); 
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .dark-theme {
-            --bg: #0f0f0f;
-            --text: #ffffff;
-            --card: #1a1a1a;
-            --border: rgba(255,255,255,0.1);
-            --nav-bg: rgba(15, 15, 15, 0.98);
+            --transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); transition: background 0.4s, color 0.4s; overflow-x: hidden; }
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        /* REVEAL ANIMATIONS FOR SCROLL */
+        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .p-card { 
+            opacity: 0; 
+            transform: translateY(50px); 
+            transition: var(--transition); 
+            background: var(--card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .p-card.active { opacity: 1; transform: translateY(0); }
+        .p-card:hover { transform: translateY(-12px); border-color: var(--gold); box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
+        .p-card img { transition: transform 0.8s ease; filter: none !important; }
+        .p-card:hover img { transform: scale(1.08); }
 
         header { background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 100; }
         .nav-link { cursor: pointer; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; transition: 0.3s; color: var(--text); position: relative; }
@@ -40,18 +55,22 @@
         .nav-link:hover::after { width: 100%; }
         .nav-link:hover { color: var(--gold); }
 
-        #mobile-menu { position: fixed; top: 0; left: -100%; width: 85%; height: 100%; background: var(--bg); z-index: 2000; transition: 0.4s; border-right: 1px solid var(--gold); padding: 40px 20px; overflow-y: auto; }
+        #mobile-menu { position: fixed; top: 0; left: -100%; width: 85%; height: 100%; background: #fff; z-index: 2000; transition: 0.4s; border-right: 1px solid var(--gold); padding: 40px 20px; overflow-y: auto; }
         #mobile-menu.active { left: 0; }
         .mobile-link { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text); border-bottom: 1px solid var(--border); padding: 15px 0; cursor: pointer; }
 
-        .p-card { background: var(--card); border: 1px solid var(--border); transition: var(--transition); }
-        .p-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        
+        /* HOME PAGE BACKGROUND - UPDATED WITH YOUR IMAGE */
+        .hero-banner { 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
         #cart-sidebar { position: fixed; top: 0; right: -450px; width: 100%; max-width: 380px; height: 100%; background: #ffffff; color: #1A1A1A; border-left: 2px solid var(--gold); z-index: 3000; transition: 0.5s; box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
         #cart-sidebar.open { right: 0; }
 
         #checkout-pointer { position: absolute; top: 55px; right: 0; background: #000; color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 9px; font-weight: bold; white-space: nowrap; display: none; animation: bounce 1s infinite; z-index: 500; }
-        #checkout-pointer::after { content: ''; position: absolute; top: -6px; right: 15px; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid #000; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
         #online-msg { display: none; background: #fff8e6; border: 1px dashed var(--gold); padding: 10px; font-size: 11px; color: #856404; margin-top: 10px; font-weight: bold; }
@@ -72,16 +91,14 @@
         .qty-btn { padding: 5px 15px; cursor: pointer; font-weight: bold; }
         .qty-input { width: 40px; text-align: center; border: none; background: transparent; font-weight: bold; }
 
-        .cancel-btn { width: 100%; background: #f1f1f1; color: #666; font-weight: bold; text-transform: uppercase; font-size: 10px; margin-top: 12px; transition: 0.3s; border: 1px solid #ddd; padding: 12px 0; cursor: pointer; }
-        .cancel-btn:hover { background: #ff4444; color: white; border-color: #ff4444; }
-
         .page-node { display: none; }
         .page-active { display: block; }
+        .footer-input { background: #1a1d26; border: none; padding: 12px; color: white; width: 100%; margin-bottom: 15px; outline: none; font-size: 14px; }
 
         @media (max-width: 768px) { .detail-card { flex-direction: column; max-height: 85vh; overflow-y: auto; } }
     </style>
 </head>
-<body class="light-theme">
+<body>
 
     <header class="fixed top-0 w-full py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
@@ -113,6 +130,47 @@
         <span onclick="showPage('contact'); toggleMobileMenu()" class="mobile-link">Contact</span>
     </div>
 
+    <!-- MAIN PAGES -->
+    <main id="home-page" class="page-node page-active">
+        <section class="hero-banner h-[100vh] flex flex-col items-center justify-center text-center px-6 relative">
+            <h2 class="text-6xl md:text-9xl mb-6 serif italic text-white reveal">Faith And <br> <span class="text-gold"> Fragrance</span></h2>
+            <button onclick="goToShop('fragrances')" class="border-2 border-gold text-gold font-bold px-16 py-5 hover:bg-gold hover:text-black transition uppercase text-xs reveal">Explore Catalog</button>
+        </section>
+    </main>
+
+    <main id="shop-page" class="page-node pt-40 pb-24"><div class="container mx-auto px-6" id="shop-content"></div></main>
+
+    <main id="about-page" class="page-node pt-40 pb-24">
+        <div class="container mx-auto px-6 max-w-6xl reveal">
+            <div class="flex flex-col items-center mb-24 text-center"><h2 class="text-6xl serif italic text-gold mb-4">About Us</h2><p class="opacity-40 uppercase tracking-[0.4em] text-xs font-black">Inspired by Seerah and Sunnah</p></div>
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="w-full lg:w-1/2 space-y-10"><h3 class="text-4xl font-bold mb-3">Muhammad Bin Saqib</h3><p class="opacity-80 text-lg">Founder & CEO of MBS. Spiritual tradition meets modern luxury.</p></div>
+                <div class="w-full lg:w-1/2 flex justify-end"><img src="ceo.jpeg" class="w-80 h-[450px] object-cover shadow-2xl"></div>
+            </div>
+        </div>
+    </main>
+
+    <main id="contact-page" class="page-node pt-40 pb-24">
+        <div class="container mx-auto px-6 max-w-5xl text-center reveal">
+            <h2 class="text-6xl serif italic mb-6 text-gold">Contact Us</h2>
+            <div class="grid md:grid-cols-2 gap-16 text-left mt-24">
+                <div>
+                    <h3 class="text-xl text-gold serif italic mb-6">WhatsApp Support</h3>
+                    <a href="https://wa.me/923707107422" target="_blank" class="text-2xl font-black">+92 370 7107422</a>
+                    <p class="mt-8 text-sm"><i class="fa fa-envelope text-gold mr-3"></i> mbsislamicaccessories@gmail.com</p>
+                    <a href="https://maps.app.goo.gl/CQzKdfCSbcFvJPnG8" target="_blank" class="block mt-4 text-sm font-bold"><i class="fa fa-map-marker-alt text-gold mr-3"></i> Shop #2, Adyala Road, RWP</a>
+                </div>
+                <div class="bg-white p-10 border border-gold/20 shadow-2xl">
+                    <form action="https://formspree.io/f/mkoqdyry" method="POST" class="space-y-6">
+                        <input type="text" name="name" placeholder="YOUR NAME" class="luxury-input" required><textarea name="message" rows="4" placeholder="MESSAGE" class="luxury-input" required></textarea>
+                        <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-xs">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODALS RESTORED -->
     <div id="product-detail-modal">
         <div class="detail-card">
             <button onclick="closeProductDetail()" class="absolute top-4 right-4 text-2xl z-20 text-black hover:text-gold transition">&times;</button>
@@ -156,126 +214,139 @@
                     <div id="online-msg">⚠️ Payment (EasyPesa): Same Number. <br> Send screenshot on WhatsApp.</div>
                 </div>
                 <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-[11px] hover:bg-gold transition">Place Order via WhatsApp</button>
-                <button type="button" onclick="cancelOrder()" class="cancel-btn">Cancel Order</button>
             </form>
         </div>
     </div>
 
-    <main id="home-page" class="page-node page-active">
-        <section class="hero-banner h-[100vh] flex flex-col items-center justify-center text-center px-6 relative">
-            <h2 class="text-6xl md:text-9xl mb-6 serif italic text-white reveal">Elegance Meets <br> <span class="text-gold"> The Fragrance</span></h2>
-            <button onclick="goToShop('fragrances')" class="border-2 border-gold text-gold font-bold px-16 py-5 hover:bg-gold hover:text-black transition uppercase text-xs reveal">Explore Catalog</button>
-        </section>
-    </main>
-
-    <main id="shop-page" class="page-node pt-40 pb-24"><div class="container mx-auto px-6 reveal" id="shop-content"></div></main>
-
-    <main id="about-page" class="page-node pt-40 pb-24">
-        <div class="container mx-auto px-6 max-w-6xl reveal">
-            <div class="flex flex-col items-center mb-24 text-center"><h2 class="text-6xl serif italic text-gold mb-4">About Us</h2><p class="opacity-40 uppercase tracking-[0.4em] text-xs font-black">Inspired by Seerah and Sunnah</p></div>
-            <div class="flex flex-col lg:flex-row items-center gap-20">
-                <div class="w-full lg:w-1/2 space-y-10"><h3 class="text-4xl font-bold mb-3">Muhammad Bin Saqib</h3><p class="opacity-80 text-lg">Founder & CEO of MBS. Spiritual tradition meets modern luxury.</p></div>
-                <div class="w-full lg:w-1/2 flex justify-end"><img src="ceo.jpeg" class="w-80 h-[450px] object-cover shadow-2xl"></div>
-            </div>
-        </div>
-    </main>
-
-    <main id="contact-page" class="page-node pt-40 pb-24">
-        <div class="container mx-auto px-6 max-w-5xl text-center reveal">
-            <h2 class="text-6xl serif italic mb-6 text-gold">Contact Us</h2>
-            <div class="grid md:grid-cols-2 gap-16 text-left mt-24">
+    <!-- MBS FOOTER -->
+    <footer class="bg-[#050810] text-white pt-20 pb-10 reveal">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-20 mb-16">
                 <div>
-                    <h3 class="text-xl text-gold serif italic mb-6">WhatsApp Support</h3>
-                    <a href="https://wa.me/923707107422" target="_blank" class="text-2xl font-black">+92 370 7107422</a>
-                    <p class="mt-8 text-sm"><i class="fa fa-envelope text-gold mr-3"></i> mbsislamicaccessories@gmail.com</p>
-                    <a href="https://maps.app.goo.gl/CQzKdfCSbcFvJPnG8" target="_blank" class="block mt-4 text-sm font-bold"><i class="fa fa-map-marker-alt text-gold mr-3"></i> Shop #2, Adyala Road, RWP</a>
+                    <h4 class="text-xl font-bold mb-6">Contact Us</h4>
+                    <div class="space-y-4 opacity-70 text-sm leading-relaxed">
+                        <p>Address: Shop #2, Adyala Road, Rawalpindi, Pakistan</p>
+                        <p>Email: mbsislamicaccessories@gmail.com</p>
+                        <p>Phone: +92 370 7107422</p>
+                        <div class="flex space-x-5 pt-4 text-xl">
+                            <a href="https://www.facebook.com/share/1ArXGBZq2e/" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="https://wa.me/923707107422" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://www.instagram.com/mbs_islamic_accessories/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-white p-10 border border-gold/20 shadow-2xl">
-                    <form action="https://formspree.io/f/mkoqdyry" method="POST" class="space-y-6">
-                        <input type="text" name="name" placeholder="YOUR NAME" class="luxury-input" required><textarea name="message" rows="4" placeholder="MESSAGE" class="luxury-input" required></textarea>
-                        <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase text-xs">Send Message</button>
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-sm opacity-70">
+                        <li onclick="showPage('home')" class="cursor-pointer hover:text-gold transition">Home</li>
+                        <li onclick="goToShop('fragrances')" class="cursor-pointer hover:text-gold transition">Our Attars</li>
+                        <li onclick="showPage('about')" class="cursor-pointer hover:text-gold transition">Our Story</li>
+                        <li onclick="showPage('contact')" class="cursor-pointer hover:text-gold transition">Contact Us</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-6">Feedback</h4>
+                    <form action="https://formspree.io/f/mkoqdyry" method="POST">
+                        <input type="text" name="name" placeholder="Name" class="footer-input" required>
+                        <input type="email" name="email" placeholder="Email" class="footer-input" required>
+                        <textarea name="message" placeholder="Message" rows="3" class="footer-input" required></textarea>
+                        <button type="submit" class="w-full bg-[#ff781f] text-white py-3 font-bold uppercase text-sm rounded shadow-lg hover:bg-orange-600 transition">Send Message</button>
                     </form>
                 </div>
             </div>
-        </div>
-    </main>
-
-    <footer class="border-t border-gold/20 py-20 bg-[#e7c29c] reveal">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1">
-                    <img src="logo.png" alt="MBS Logo" class="h-12 mb-6 mx-auto md:mx-0">
-                    <p class="text-[10px] uppercase tracking-[0.2em] opacity-60 leading-loose text-center md:text-left font-medium">Redefining Islamic luxury through spiritual heritage.</p>
-                </div>
-                <div class="border-b border-gold/10 md:border-0 pb-4 md:pb-0">
-                    <h4 onclick="toggleFooterSect('foot-nav')" class="serif italic text-gold text-2xl mb-4 md:mb-8 flex justify-between items-center cursor-pointer md:cursor-default">Navigation <i class="fa fa-chevron-down text-[10px] md:hidden"></i></h4>
-                    <ul id="foot-nav" class="hidden md:block space-y-5 text-[11px] uppercase font-bold text-center md:text-left">
-                        <li onclick="showPage('home')" class="cursor-pointer">Home</li><li onclick="goToShop('fragrances')" class="cursor-pointer">Attars</li><li onclick="showPage('about')" class="cursor-pointer">Our Story</li><li onclick="showPage('contact')" class="cursor-pointer">Contact</li>
-                    </ul>
-                </div>
-                <div class="border-b border-gold/10 md:border-0 pb-4 md:pb-0">
-                    <h4 onclick="toggleFooterSect('foot-contact')" class="serif italic text-gold text-2xl mb-4 md:mb-8 flex justify-between items-center cursor-pointer md:cursor-default">Contact Info <i class="fa fa-chevron-down text-[10px] md:hidden"></i></h4>
-                    <div id="foot-contact" class="hidden md:block text-center md:text-left text-[10px] uppercase opacity-60 leading-loose">Shop #2, Adyala Road, Rawalpindi<br>+92 370 7107422</div>
-                </div>
-                <div class="text-center md:text-left">
-                    <h4 class="serif italic text-gold text-2xl mb-8">Social Presence</h4>
-                    <div class="flex justify-center md:justify-start space-x-8 text-2xl">
-                        <a href="https://www.facebook.com/share/1ArXGBZq2e/" target="_blank" class="hover:text-gold transition"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://wa.me/923707107422" target="_blank" class="hover:text-gold transition"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.instagram.com/mbs_islamic_accessories/" target="_blank" class="hover:text-gold transition"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
+            <div class="text-center opacity-40 text-xs border-t border-white/10 pt-10">
+                &copy; 2026 Muhammad Bin Saqib | Maaz Bin Ayyub. All rights reserved.
             </div>
-            <div class="pt-12 border-t border-black/5 text-center text-[10px] uppercase opacity-40 font-bold">&copy; 2026 Muhammad Bin Saqib | Maaz Bin Ayyub.</div>
         </div>
     </footer>
 
     <script>
     let cart = []; const WA_NUMBER = "923707107422"; let allProducts = [];
+    
     function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
-    function showPage(id) { document.querySelectorAll('.page-node').forEach(p => p.classList.remove('page-active')); document.getElementById(id + '-page').classList.add('page-active'); window.scrollTo({top: 0, behavior: 'smooth'}); handleReveal(); }
-    function toggleFooterSect(id) { if (window.innerWidth < 768) { const sect = document.getElementById(id); sect.classList.toggle('hidden'); } }
+    
+    function showPage(id) { 
+        document.querySelectorAll('.page-node').forEach(p => p.classList.remove('page-active')); 
+        document.getElementById(id + '-page').classList.add('page-active'); 
+        window.scrollTo({top: 0, behavior: 'smooth'}); 
+        handleReveal(); 
+    }
+
     function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
+
     function updateCartUI() {
         const container = document.getElementById('cart-items');
         document.getElementById('cart-count').innerText = cart.reduce((acc, item) => acc + item.qty, 0);
         let total = 0;
         container.innerHTML = cart.map((item, index) => {
             total += item.price * item.qty;
-            return `<div class="flex items-center gap-4 bg-gray-50 p-4 rounded border border-gray-100 mb-3"><img src="${item.img}" class="w-14 h-14 object-cover rounded"><div class="flex-grow"><h4 class="text-[11px] font-bold text-black uppercase">${item.name}</h4><p class="text-gold text-xs font-bold">${item.qty} x Rs. ${item.price.toLocaleString()}</p></div><button onclick="removeItem(${index})" class="text-gray-400 hover:text-red-500 text-xl">&times;</button></div>`;
+            return `<div class="flex items-center gap-4 bg-gray-50 p-4 rounded border border-gray-100 mb-3">
+                <img src="${item.img}" class="w-14 h-14 object-cover rounded">
+                <div class="flex-grow">
+                    <h4 class="text-[11px] font-bold text-black uppercase">${item.name}</h4>
+                    <p class="text-gold text-xs font-bold">${item.qty} x Rs. ${item.price.toLocaleString()}</p>
+                </div>
+                <button onclick="removeItem(${index})" class="text-gray-400 hover:text-red-500 text-xl">&times;</button>
+            </div>`;
         }).join('');
         document.getElementById('cart-total').innerText = `Rs. ${total.toLocaleString()}`;
     }
+
     function addToCart(name, price, img, qty = 1) {
         const existing = cart.find(i => i.name === name);
-        if(existing) { existing.qty += qty; } else { cart.push({ name, price: parseInt(price.toString().replace(/,/g, '')), img, qty }); }
-        updateCartUI(); document.getElementById('checkout-pointer').style.display = 'block';
+        if(existing) { existing.qty += qty; } 
+        else { cart.push({ name, price: parseInt(price.toString().replace(/,/g, '')), img, qty }); }
+        updateCartUI(); 
+        document.getElementById('checkout-pointer').style.display = 'block';
         setTimeout(() => { document.getElementById('checkout-pointer').style.display = 'none'; }, 3000);
         if(window.innerWidth > 1024) document.getElementById('cart-sidebar').classList.add('open');
     }
+
     function removeItem(index) { cart.splice(index, 1); updateCartUI(); }
     function openCheckout() { if(cart.length > 0) document.getElementById('checkout-modal').style.display = 'flex'; }
     function closeCheckout() { document.getElementById('checkout-modal').style.display = 'none'; }
-    function cancelOrder() { cart = []; updateCartUI(); closeCheckout(); alert("Order Cancelled."); }
     function togglePayMsg(show) { document.getElementById('online-msg').style.display = show ? 'block' : 'none'; }
+
     function openProductDetail(index) {
-        const p = allProducts[index]; document.getElementById('detail-img').src = p.i;
-        document.getElementById('detail-name').innerText = p.n; document.getElementById('detail-price').innerText = `Rs. ${p.p}`;
-        document.getElementById('detail-category').innerText = p.cat; document.getElementById('detail-qty').value = 1;
-        const thumbRow = document.getElementById('detail-thumbs'); thumbRow.innerHTML = '';
-        for(let i=0; i<4; i++) { thumbRow.innerHTML += `<img src="${p.i}" class="thumb-box">`; }
-        document.getElementById('detail-add-btn').onclick = () => { addToCart(p.n, p.p, p.i, parseInt(document.getElementById('detail-qty').value)); closeProductDetail(); };
+        const p = allProducts[index]; 
+        document.getElementById('detail-img').src = p.i;
+        document.getElementById('detail-name').innerText = p.n; 
+        document.getElementById('detail-price').innerText = `Rs. ${p.p}`;
+        document.getElementById('detail-category').innerText = p.cat; 
+        document.getElementById('detail-qty').value = 1;
+        const thumbRow = document.getElementById('detail-thumbs'); 
+        thumbRow.innerHTML = '';
+        for(let i=0; i<4; i++) { thumbRow.innerHTML += `<img src="${p.i}" class="thumb-box" onclick="document.getElementById('detail-img').src='${p.i}'">`; }
+        document.getElementById('detail-add-btn').onclick = () => { 
+            addToCart(p.n, p.p, p.i, parseInt(document.getElementById('detail-qty').value)); 
+            closeProductDetail(); 
+        };
         document.getElementById('product-detail-modal').style.display = 'flex';
     }
+
     function closeProductDetail() { document.getElementById('product-detail-modal').style.display = 'none'; }
-    function updateDetailQty(val) { let input = document.getElementById('detail-qty'); let newQty = parseInt(input.value) + val; if(newQty >= 1) input.value = newQty; }
+    function updateDetailQty(val) { 
+        let input = document.getElementById('detail-qty'); 
+        let newQty = parseInt(input.value) + val; 
+        if(newQty >= 1) input.value = newQty; 
+    }
+
     function handleFinalSubmit(e) {
         e.preventDefault();
         let msg = `*MBS ORDER*\nCustomer: ${document.getElementById('cust-name').value}\nItems:\n`;
         cart.forEach(i => { msg += `- ${i.name} x${i.qty} (Rs. ${i.price.toLocaleString()})\n`; });
-        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank'); closeCheckout();
+        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank'); 
+        closeCheckout();
     }
-    function goToShop(sect) { showPage('shop'); setTimeout(() => { const el = document.getElementById(sect + '-sect'); if(el) window.scrollTo({top: el.offsetTop - 120, behavior: 'smooth'}); }, 200); }
+
+    function goToShop(sect) { 
+        showPage('shop'); 
+        setTimeout(() => { 
+            const el = document.getElementById(sect + '-sect'); 
+            if(el) window.scrollTo({top: el.offsetTop - 120, behavior: 'smooth'}); 
+        }, 200); 
+    }
+
     function generate() {
         const sections = [
             { id: 'fragrances', title: 'Premium Attars', items: Array(8).fill({n: "Royal Musk", p: "3,500", i: "ceo.jpeg"}) },
@@ -288,13 +359,27 @@
             let html = `<section id="${sec.id}-sect" class="mb-24 reveal"><h3 class="text-2xl serif italic text-gold mb-10 border-b border-gold/20 pb-4">${sec.title}</h3><div class="grid grid-cols-2 lg:grid-cols-4 gap-8">`;
             sec.items.forEach(item => {
                 const idx = allProducts.length; allProducts.push({...item, cat: sec.title});
-                html += `<div class="p-card p-4 text-center rounded"><img src="${item.i}" onclick="openProductDetail(${idx})" class="w-full h-60 object-cover mb-4 grayscale hover:grayscale-0 transition cursor-pointer"><h4 class="text-[10px] font-bold uppercase mb-1 truncate">${item.n}</h4><p class="text-gold text-xs font-bold mb-4">Rs. ${item.p}</p><button onclick="addToCart('${item.n}', '${item.p}', '${item.i}')" class="w-full py-3 border border-gold text-gold text-[9px] font-bold hover:bg-gold hover:text-black transition uppercase">Add to Cart</button></div>`;
+                html += `<div class="p-card p-4 text-center rounded">
+                    <img src="${item.i}" onclick="openProductDetail(${idx})" class="w-full h-60 object-cover mb-4 cursor-pointer">
+                    <h4 class="text-[10px] font-bold uppercase mb-1 truncate">${item.n}</h4>
+                    <p class="text-gold text-xs font-bold mb-4">Rs. ${item.p}</p>
+                    <button onclick="addToCart('${item.n}', '${item.p}', '${item.i}')" class="w-full py-3 border border-gold text-gold text-[9px] font-bold hover:bg-gold hover:text-black transition uppercase">Add to Cart</button>
+                </div>`;
             });
             html += `</div></section>`; container.innerHTML += html;
         });
         handleReveal();
     }
-    function handleReveal() { const reveals = document.querySelectorAll('.reveal'); for (let i = 0; i < reveals.length; i++) { if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) reveals[i].classList.add('active'); } }
+
+    function handleReveal() { 
+        const reveals = document.querySelectorAll('.reveal, .p-card'); 
+        reveals.forEach(el => { 
+            const windowHeight = window.innerHeight;
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) { el.classList.add('active'); }
+        }); 
+    }
+
     window.addEventListener('scroll', handleReveal); window.onload = generate;
     </script>
 </body>
