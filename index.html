@@ -13,7 +13,7 @@
     <!-- GOOGLE SEARCH CONSOLE -->
     <meta name="google-site-verification" content="y5QSKZAHDSxdsF_Wrc80O1Xh1wIwCftNlx1OyALgu-k" />
 
-    <link rel="icon" type="image/png" href="hero.jpj">
+    <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,28 +26,43 @@
             --card: #FFFFFF;          
             --border: rgba(197, 160, 89, 0.3); 
             --nav-bg: rgba(252, 251, 250, 0.98); 
-            --transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); transition: background 0.4s, color 0.4s; overflow-x: hidden; }
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        /* REVEAL ANIMATIONS FOR SCROLL */
-        .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* PREMIUM SCROLL ANIMATION */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: var(--transition); 
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
 
+        /* PRODUCT CARD STAGGERED ANIMATION */
         .p-card { 
             opacity: 0; 
-            transform: translateY(50px); 
-            transition: var(--transition); 
+            transform: translateY(40px) scale(0.95); 
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             background: var(--card);
             border: 1px solid var(--border);
             overflow: hidden;
         }
-        .p-card.active { opacity: 1; transform: translateY(0); }
-        .p-card:hover { transform: translateY(-12px); border-color: var(--gold); box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
-        .p-card img { transition: transform 0.8s ease; filter: none !important; }
-        .p-card:hover img { transform: scale(1.08); }
+        .p-card.active { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
+        }
+        .p-card:hover { 
+            transform: translateY(-15px) scale(1.02); 
+            border-color: var(--gold); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12); 
+        }
+        .p-card img { transition: transform 1.2s ease; }
+        .p-card:hover img { transform: scale(1.1); }
 
         header { background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); z-index: 100; }
         .nav-link { cursor: pointer; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; transition: 0.3s; color: var(--text); position: relative; }
@@ -102,8 +117,8 @@
     <header class="fixed top-0 w-full py-4 px-6">
         <div class="container mx-auto flex justify-between items-center">
             <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-[var(--text)]"><i class="fa fa-bars"></i></button>
-            <div onclick="showPage('home')" class="cursor-pointer"><img src="hero.jpj" alt="MBS Logo" class="h-8 md:h-16"></div>
-            <nav class="hidden lg:flex space-x-7 items-center">
+            <div onclick="showPage('home')" class="cursor-pointer"><img src="logo.png" alt="MBS Logo" class="h-8 md:h-16"></div>
+            <nav class="hidden lg:flex space-x-7 items-center text-[10px]">
                 <span onclick="showPage('home')" class="nav-link">Home</span>
                 <span onclick="goToShop('fragrances')" class="nav-link">Attars</span>
                 <span onclick="goToShop('imamaas')" class="nav-link">Imamaas</span>
@@ -124,7 +139,7 @@
     </header>
 
     <div id="mobile-menu">
-        <div class="flex justify-between items-center mb-10"><img src="hero.jpj" class="h-8"><button onclick="toggleMobileMenu()" class="text-4xl">&times;</button></div>
+        <div class="flex justify-between items-center mb-10"><img src="logo.png" class="h-8"><button onclick="toggleMobileMenu()" class="text-4xl">&times;</button></div>
         <span onclick="showPage('home'); toggleMobileMenu()" class="mobile-link">Home</span>
         <span onclick="goToShop('fragrances'); toggleMobileMenu()" class="mobile-link">Attars</span>
         <span onclick="goToShop('imamaas'); toggleMobileMenu()" class="mobile-link">Imamaas</span>
@@ -260,7 +275,7 @@
                     </form>
                 </div>
             </div>
-            <div class="text-center opacity-40 text-xs border-t border-white/10 pt-10">
+            <div class="text-center opacity-40 text-[10px] border-t border-white/10 pt-10">
                 &copy; 2026 Muhammad Bin Saqib | Maaz Bin Ayyub. All rights reserved.
             </div>
         </div>
@@ -358,9 +373,11 @@
         msg += `📦 *Order Details:*\n${itemsList}\n`;
         msg += `💰 *TOTAL AMOUNT: Rs. ${total.toLocaleString()}*\n\n`;
         msg += `_Please confirm my order._`;
-        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank'); 
-        closeCheckout();
         alert("oh ji shukriya ji bhut bhut ji💕💖");
+        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+         
+        closeCheckout();
+        
         cart = [];
         updateCartUI();
     }
@@ -385,9 +402,11 @@
         container.innerHTML = ""; allProducts = [];
         sections.forEach(sec => {
             let html = `<section id="${sec.id}-sect" class="mb-24 reveal"><h3 class="text-2xl serif italic text-gold mb-10 border-b border-gold/20 pb-4">${sec.title}</h3><div class="grid grid-cols-2 lg:grid-cols-4 gap-8">`;
-            sec.items.forEach(item => {
+            sec.items.forEach((item, index) => {
                 const idx = allProducts.length; allProducts.push({...item, cat: sec.title});
-                html += `<div class="p-card p-4 text-center rounded">
+                // Adding inline delay for stagger effect (0.1s, 0.2s, 0.3s etc per row)
+                let delay = (index % 4) * 0.15;
+                html += `<div class="p-card p-4 text-center rounded" style="transition-delay: ${delay}s">
                     <img src="${item.i}" onclick="openProductDetail(${idx})" class="w-full h-60 object-cover mb-4 cursor-pointer">
                     <h4 class="text-[10px] font-bold uppercase mb-1 truncate">${item.n}</h4>
                     <p class="text-gold text-xs font-bold mb-4">Rs. ${item.p}</p>
@@ -404,7 +423,9 @@
         reveals.forEach(el => { 
             const windowHeight = window.innerHeight;
             const elementTop = el.getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) { el.classList.add('active'); }
+            if (elementTop < windowHeight - 50) { 
+                el.classList.add('active'); 
+            }
         }); 
     }
 
