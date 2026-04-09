@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="google-site-verification" content="y5QSKZAHDSxdsF_Wrc80O1Xh1wIwCftNlx1OyALgu-k" />
+
+    <!-- FIREBASE SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
    
     <style>
         :root { 
@@ -65,7 +69,7 @@
         .thumb-box:hover, .thumb-box.active-thumb { opacity: 1; border-color: var(--gold); }
 
         #easypesa-msg { display: none; background: #fff8e6; border: 1px dashed #C5A059; padding: 10px; font-size: 12px; margin-top: 10px; color: #856404; font-weight: bold; }
-
+        
         @media (max-width: 768px) { .detail-card { flex-direction: column; max-height: 85vh; overflow-y: auto; } }
     </style>
 </head>
@@ -113,8 +117,10 @@
         </section>
     </main>
 
+    <!-- SHOP PAGE -->
     <main id="shop-page" class="page-node pt-40 pb-24"><div class="container mx-auto px-6" id="shop-content"></div></main>
 
+    <!-- ABOUT PAGE -->
     <main id="about-page" class="page-node pt-40 pb-24">
         <div class="container mx-auto px-6 max-w-6xl reveal text-center">
             <h2 class="text-6xl serif italic text-gold mb-4">About Us</h2>
@@ -122,13 +128,14 @@
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="w-full lg:w-1/2 space-y-10 text-left">
                     <h3 class="text-4xl font-bold mb-3">Muhammad Bin Saqib</h3>
-                    <p class="opacity-80 text-lg">Founder & CEO of MBS. Spiritual tradition meets modern luxury.</p>
+                    <p class="opacity-80 text-lg">Founder & CEO of MBS. Our brand is built on the foundation of spiritual tradition meeting modern luxury.</p>
                 </div>
                 <div class="w-full lg:w-1/2 flex justify-end"><img src="ceo.jpeg" class="w-80 h-[450px] object-cover shadow-2xl rounded-lg"></div>
             </div>
         </div>
     </main>
 
+    <!-- CONTACT PAGE -->
     <main id="contact-page" class="page-node pt-40 pb-24">
         <div class="container mx-auto px-6 max-w-5xl text-center reveal">
             <h2 class="text-6xl serif italic mb-6 text-gold">Contact Us</h2>
@@ -160,10 +167,10 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-xs mb-2 uppercase">Sales</p><h3 id="stat-sales" class="text-2xl font-bold text-gold">Rs. 0</h3></div>
-                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-xs mb-2 uppercase">Orders</p><h3 id="stat-orders" class="text-2xl font-bold">0</h3></div>
-                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-xs mb-2 uppercase text-yellow-500">Pending</p><h3 id="stat-pending" class="text-2xl font-bold text-yellow-500">0</h3></div>
-                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-xs mb-2 uppercase text-green-400">Sent</p><h3 id="stat-dispatched" class="text-2xl font-bold text-green-400">0</h3></div>
+                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-[10px] mb-2 uppercase">Sales</p><h3 id="stat-sales" class="text-xl font-bold text-gold">Rs. 0</h3></div>
+                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-[10px] mb-2 uppercase">Orders</p><h3 id="stat-orders" class="text-xl font-bold">0</h3></div>
+                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-[10px] mb-2 uppercase text-yellow-500">Pending</p><h3 id="stat-pending" class="text-xl font-bold text-yellow-500">0</h3></div>
+                <div class="bg-[#1a1d26] p-6 rounded-lg text-center"><p class="text-gray-400 text-[10px] mb-2 uppercase text-green-400">Sent</p><h3 id="stat-dispatched" class="text-xl font-bold text-green-400">0</h3></div>
             </div>
             <div class="bg-[#1a1d26] p-6 rounded-lg overflow-x-auto">
                 <table class="w-full text-left">
@@ -228,14 +235,15 @@
         <div class="bg-white p-12 text-center rounded-lg border-t-4 border-gold shadow-2xl max-w-sm relative">
             <button onclick="document.getElementById('thank-you-overlay').style.display='none'" class="absolute top-4 right-4 text-gray-400 hover:text-black">&times;</button>
             <div class="text-gold text-6xl mb-6"><i class="fa fa-check-circle"></i></div>
-            <h2 class="serif italic text-3xl mb-4">Shukriya ji💕</h2>
-            <p class="text-gray-500 text-sm mb-8"> bhut bhut ji💕💖. Please click below to confirm on WhatsApp.</p>
+            <h2 class="serif italic text-3xl mb-4">Shukriya Bhai!💕</h2>
+            <p class="text-gray-500 text-sm mb-8">oh ji shukriya ji bhut bhut ji💕💖. Please click below to confirm on WhatsApp.</p>
             <button id="final-wa-btn" class="w-full bg-[#25D366] text-white py-4 rounded-full font-bold flex items-center justify-center gap-3 hover:scale-105 transition">
                 <i class="fab fa-whatsapp text-xl"></i> Proceed to WhatsApp
             </button>
         </div>
     </div>
 
+    <!-- ADMIN LOGIN -->
     <div id="login-modal">
         <div class="bg-white p-10 rounded-lg w-80 text-center border-2 border-gold">
             <h3 class="serif italic text-2xl mb-6">Owner Login</h3>
@@ -244,33 +252,34 @@
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer class="bg-[#050810] text-white pt-20 pb-10">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-20 mb-16 text-center lg:text-left">
                 <div>
                     <h4 class="text-xl font-bold mb-6">Contact Us</h4>
-                    <p class="opacity-60 text-sm">Shop #2, Adyala Road, PK</p>
+                    <p class="opacity-60 text-sm">Shop #2, Adyala Road, Rawalpindi, PK</p>
                     <p class="opacity-60 text-sm mb-4">+92 370 7107422</p>
                     <div class="flex justify-center lg:justify-start space-x-5 pt-4">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <span onclick="openLogin()" class="cursor-pointer opacity-10 hover:opacity-100 text-[8px]">OWNER LOGIN</span>
+                        <span onclick="openLogin()" class="cursor-pointer opacity-10 hover:opacity-100 text-[8px] tracking-widest">OWNER LOGIN</span>
                     </div>
                 </div>
                 <div>
                     <h4 class="text-xl font-bold mb-6 tracking-widest uppercase">Quick Links</h4>
                     <ul class="space-y-3 text-sm opacity-60">
-                        <li onclick="showPage('home')" class="cursor-pointer">Home</li>
-                        <li onclick="goToShop('fragrances')" class="cursor-pointer">Attars</li>
-                        <li onclick="showPage('about')" class="cursor-pointer">Our Story</li>
+                        <li onclick="showPage('home')" class="cursor-pointer hover:text-gold">Home</li>
+                        <li onclick="goToShop('fragrances')" class="cursor-pointer hover:text-gold">Our Attars</li>
+                        <li onclick="showPage('about')" class="cursor-pointer hover:text-gold">Our Story</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xl font-bold mb-6">Feedback</h4>
+                    <h4 class="text-xl font-bold mb-6 uppercase tracking-widest">Feedback</h4>
                     <form action="https://formspree.io/f/mkoqdyry" method="POST" class="flex flex-col">
-                        <input type="email" name="email" placeholder="Email" class="footer-input" required>
-                        <textarea name="message" placeholder="Message" rows="2" class="footer-input" required></textarea>
-                        <button type="submit" class="w-full bg-[#ff781f] text-white py-2 font-bold uppercase text-xs rounded">Send Feedback</button>
+                        <input type="email" name="email" placeholder="Email Address" class="footer-input" required>
+                        <textarea name="message" placeholder="Your Feedback" rows="2" class="footer-input" required></textarea>
+                        <button type="submit" class="w-full bg-[#ff781f] text-white py-3 font-bold uppercase text-[10px] rounded">Send Feedback</button>
                     </form>
                 </div>
             </div>
@@ -279,8 +288,20 @@
     </footer>
 
     <script>
+        // --- FIREBASE CONFIGURATION ---
+        const firebaseConfig = {
+          apiKey: "AIzaSyDzdbJiNDHCErR2ZlPZBq4dRbcfTY3COH4",
+          authDomain: "mbs-perfumes.firebaseapp.com",
+          projectId: "mbs-perfumes",
+          storageBucket: "mbs-perfumes.firebasestorage.app",
+          messagingSenderId: "296171207040",
+          appId: "1:296171207040:web:e7a8fa7ec4672a933f2965"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
         let cart = []; const WA_NUMBER = "923707107422"; let allProducts = [];
-        let tempOrderData = null; // To hold data before final click
+        let tempOrderData = null;
 
         // NAVIGATION
         function toggleMobileMenu() { 
@@ -294,7 +315,7 @@
             handleReveal();
         }
 
-        // CART
+        // CART UI
         function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
         function updateCartUI() {
             const container = document.getElementById('cart-items');
@@ -302,10 +323,10 @@
             let total = 0;
             container.innerHTML = cart.map((item, index) => {
                 total += item.price * item.qty;
-                return `<div class="flex items-center gap-4 bg-gray-50 p-4 border border-gray-100 mb-3 rounded">
+                return `<div class="flex items-center gap-4 bg-gray-50 p-4 border mb-3 rounded text-[11px]">
                     <img src="${item.img}" class="w-12 h-12 object-cover rounded">
-                    <div class="flex-grow text-[11px]"><b>${item.name}</b><br><span class="text-gold">Rs. ${item.price.toLocaleString()} x ${item.qty}</span></div>
-                    <button onclick="removeItem(${index})" class="text-red-400 px-2">&times;</button>
+                    <div class="flex-grow"><b>${item.name}</b><br><span class="text-gold">Rs. ${item.price.toLocaleString()} x ${item.qty}</span></div>
+                    <button onclick="removeItem(${index})" class="text-red-400 font-bold">&times;</button>
                 </div>`;
             }).join('');
             document.getElementById('cart-total').innerText = `Rs. ${total.toLocaleString()}`;
@@ -344,7 +365,7 @@
         function closeProductDetail() { document.getElementById('product-detail-modal').style.display = 'none'; }
         function updateDetailQty(v) { let q = parseInt(document.getElementById('detail-qty').value) + v; if(q>=1) document.getElementById('detail-qty').value = q; }
         
-        // CHECKOUT & LOGIC (Updated to save only on final click)
+        // CHECKOUT & FIREBASE SAVING
         function togglePayMsg(show) { document.getElementById('easypesa-msg').style.display = show ? 'block' : 'none'; }
         function openCheckout() { if(cart.length > 0) document.getElementById('checkout-modal').style.display = 'flex'; }
 
@@ -358,44 +379,56 @@
             let total = 0, itemsSummary = "";
             cart.forEach(i => { total += (i.price * i.qty); itemsSummary += `${i.name} (x${i.qty}), `; });
 
-            // Hold data in memory, don't save to history yet
-            tempOrderData = { date: new Date().toLocaleDateString(), name, items: itemsSummary, amount: total, status: 'Pending' };
+            // Prepare data but DON'T save yet
+            tempOrderData = { date: new Date().toLocaleString(), name, items: itemsSummary, amount: total, status: 'Pending', timestamp: firebase.firestore.FieldValue.serverTimestamp() };
 
             const waMsg = `*MBS ORDER*\n👤 Customer: ${name}\n🏙️ City: ${city}\n🏠 Address: ${address}\n💳 Payment: ${payment}\n💰 Total: Rs. ${total.toLocaleString()}`;
             
             document.getElementById('checkout-modal').style.display = 'none';
             document.getElementById('thank-you-overlay').style.display = 'flex';
 
-            document.getElementById('final-wa-btn').onclick = () => {
-                // SAVE ONLY WHEN CLICKED
-                saveOrderToHistory(tempOrderData);
+            document.getElementById('final-wa-btn').onclick = async () => {
+                // SAVE TO CLOUD DATABASE ONLY ON CLICK
+                await db.collection("orders").add(tempOrderData);
                 window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
                 document.getElementById('thank-you-overlay').style.display = 'none';
                 cart = []; updateCartUI(); showPage('home');
-                tempOrderData = null;
             };
         }
 
-        // DASHBOARD
+        // DASHBOARD FETCH
         function openLogin() { document.getElementById('login-modal').style.display = 'flex'; }
-        function checkLogin() { if(document.getElementById('admin-pass').value === "mbs123") { document.getElementById('login-modal').style.display = 'none'; showPage('dashboard'); renderDashboard(); } else { alert("Incorrect"); } }
-        function saveOrderToHistory(data) { if(!data) return; let h = JSON.parse(localStorage.getItem('mbs_h')) || []; h.unshift(data); localStorage.setItem('mbs_h', JSON.stringify(h)); }
-        function renderDashboard() {
-            const h = JSON.parse(localStorage.getItem('mbs_h')) || [];
+        function checkLogin() { if(document.getElementById('admin-pass').value === "mbs123") { document.getElementById('login-modal').style.display = 'none'; showPage('dashboard'); renderDashboard(); } else { alert("Wrong Pass"); } }
+        
+        async function renderDashboard() {
+            const snapshot = await db.collection("orders").orderBy("timestamp", "desc").get();
             let s = 0, p = 0, d = 0;
-            document.getElementById('dash-order-rows').innerHTML = h.map((o, i) => {
+            document.getElementById('dash-order-rows').innerHTML = snapshot.docs.map(doc => {
+                const o = doc.data();
                 s += o.amount; if(o.status === 'Pending') p++; else d++;
-                return `<tr class="border-b border-white/5"><td class="py-4 text-gray-500">${o.date}</td><td>${o.name}</td><td class="text-[10px]">${o.items}</td><td class="text-gold">Rs. ${o.amount.toLocaleString()}</td><td class="${o.status==='Pending'?'text-yellow-500':'text-green-400'}">${o.status}</td><td><button onclick="toggleStatus(${i})" class="bg-white/5 px-2 py-1 rounded text-[10px]">Edit</button></td></tr>`;
+                return `<tr class="border-b border-white/5"><td class="py-4 text-gray-500">${o.date}</td><td>${o.name}</td><td class="text-[10px]">${o.items}</td><td class="text-gold">Rs. ${o.amount.toLocaleString()}</td><td class="${o.status==='Pending'?'text-yellow-500':'text-green-400'}">${o.status}</td><td><button onclick="toggleStatus('${doc.id}', '${o.status}')" class="bg-white/5 px-2 py-1 rounded text-[10px]">Update</button></td></tr>`;
             }).join('');
             document.getElementById('stat-sales').innerText = `Rs. ${s.toLocaleString()}`;
-            document.getElementById('stat-orders').innerText = h.length;
+            document.getElementById('stat-orders').innerText = snapshot.size;
             document.getElementById('stat-pending').innerText = p;
             document.getElementById('stat-dispatched').innerText = d;
         }
-        function toggleStatus(i) { let h = JSON.parse(localStorage.getItem('mbs_h')); h[i].status = h[i].status==='Pending'?'Dispatched':'Pending'; localStorage.setItem('mbs_h', JSON.stringify(h)); renderDashboard(); }
-        function clearDashboard() { if(confirm("Clear all orders?")) { localStorage.removeItem('mbs_h'); renderDashboard(); } }
 
-        // REVEAL & GENERATOR
+        async function toggleStatus(id, current) { 
+            const nextStatus = current === 'Pending' ? 'Dispatched' : 'Pending';
+            await db.collection("orders").doc(id).update({ status: nextStatus });
+            renderDashboard(); 
+        }
+
+        async function clearDashboard() { 
+            if(confirm("Clear all orders from Cloud?")) {
+                const snapshot = await db.collection("orders").get();
+                snapshot.docs.forEach(doc => doc.ref.delete());
+                renderDashboard();
+            }
+        }
+
+        // GENERATOR
         function goToShop(sect) { showPage('shop'); setTimeout(() => { const el = document.getElementById(sect + '-sect'); if(el) window.scrollTo({top: el.offsetTop - 120, behavior: 'smooth'}); }, 200); }
         function generate() {
             const sections = [
